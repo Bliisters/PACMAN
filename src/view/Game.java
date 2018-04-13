@@ -27,7 +27,7 @@ public class Game extends JFrame{
 	JPanel panPrincipal;
 	JPanel panGame;
 	Panneau panStats;
-	
+	//aa
 	JLabel logo;
 	JLabel test;
 	
