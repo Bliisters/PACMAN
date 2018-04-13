@@ -1,0 +1,407 @@
+package data;
+
+
+import java.awt.Image;
+import java.io.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+public class Data implements DataGetters{
+	
+	public Data(){
+		
+	}
+	
+	@Override
+	public int getMapiWidth(int i){
+		
+		String map = "files/maps/map"+Integer.toString(i)+".txt";
+		BufferedReader br;
+		int res = -1;
+		
+		try {
+			br = new BufferedReader(new FileReader(map));
+			res= Integer.parseInt(br.readLine());
+			br.close();
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		return res;
+	}
+	
+	@Override
+	public int getMapiHeight(int i){
+		
+		String map = "files/maps/map"+Integer.toString(i)+".txt";
+		BufferedReader br;
+		int res = -1;
+		
+		try {
+			br = new BufferedReader(new FileReader(map));
+			br.readLine();
+			res= Integer.parseInt(br.readLine());
+			br.close();
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		return res;
+	}
+	
+	@Override
+	public int[][] getTableau(int i){
+		
+		String map = "files/maps/map"+Integer.toString(i)+".txt";
+		int[][] mapy = new int[getMapiHeight(i)][getMapiWidth(i)];
+		String line;
+		BufferedReader br;
+		int lineCounter = 0;
+		
+		try {
+			
+			br = new BufferedReader(new FileReader(map));
+			br.readLine();
+			br.readLine();
+			
+			while ((line = br.readLine()) != null) {
+				
+				for(int j=0; j<getMapiWidth(i);j++) {
+				/*
+					
+					if (line.split("-")[j].equals("05")) {
+						mapy[j][lineCounter][0] = 0;
+						mapy[j][lineCounter][1] = 5;
+					}
+					
+					else if (line.split("-")[j].equals("06")) {
+						mapy[j][lineCounter][0] = 0;
+						mapy[j][lineCounter][2] = 6;
+					}
+					
+					else if (line.split("-")[j].equals("07")) {
+						mapy[j][lineCounter][0] = 0; 
+						mapy[j][lineCounter][3] = 7;
+					}
+					
+					else if (line.split("-")[j].equals("08")) {
+						mapy[j][lineCounter][0] = 0;
+						mapy[j][lineCounter][4] = 8;
+					}
+					
+					else if (line.split("-")[j].equals("09")) {
+						mapy[j][lineCounter][0] = 0;
+						mapy[j][lineCounter][5] = 9;
+					}
+					
+					else */mapy[lineCounter][j] = Integer.parseInt(line.split("-")[j]);
+					
+				}
+				lineCounter++;
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return mapy; 
+	}
+
+	@Override
+	public ImageIcon getSpritePacMan(int i) {
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFHv2.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFBv2.gif");
+		  case 2:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");
+		  case 3:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFGv2.gif");
+		  default:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");             
+		}
+	}
+
+	@Override
+	public ImageIcon getSpriteBlinky(int i) {
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/characters/blinky/blinky_up.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/blinky/blinky_down.gif");
+		  case 2:
+			  return new ImageIcon("images/characters/blinky/blinky_right.gif");
+		  case 3:
+			  return new ImageIcon("images/characters/blinky/blinky_left.gif");
+		  case 4:
+			  return new ImageIcon("images/characters/blinky/blinky_killed_up.png");
+		  case 5:
+			  return new ImageIcon("images/characters/blinky/blinky_killed_down.png");
+		  case 6:
+			  return new ImageIcon("images/characters/blinky/blinky_killed_right.png");
+		  case 7:
+			  return new ImageIcon("images/characters/blinky/blinky_killed_left.png");
+		  case 8:
+			  return new ImageIcon("images/characters/blinky/blinky_danger_white.gif");
+		  case 9:
+			  return new ImageIcon("images/characters/blinky/blinky_danger_blue.gif");
+		  default:
+			  return new ImageIcon("images/characters/blinky/blinky_left.gif");           
+		}
+	}
+
+	@Override
+	public ImageIcon getSpritePinky(int i) {
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/characters/pinky/pinky_up.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/pinky/pinky_down.gif");
+		  case 2:
+			  return new ImageIcon("images/characters/pinky/pinky_right.gif");
+		  case 3:
+			  return new ImageIcon("images/characters/pinky/pinky_left.gif");
+		  case 4:
+			  return new ImageIcon("images/characters/pinky/pinky_killed_up.png");
+		  case 5:
+			  return new ImageIcon("images/characters/pinky/pinky_killed_down.png");
+		  case 6:
+			  return new ImageIcon("images/characters/pinky/pinky_killed_right.png");
+		  case 7:
+			  return new ImageIcon("images/characters/pinky/pinky_killed_left.png");
+		  case 8:
+			  return new ImageIcon("images/characters/pinky/pinky_danger_white.gif");
+		  case 9:
+			  return new ImageIcon("images/characters/pinky/pinky_danger_blue.gif");
+		  default:
+			  return new ImageIcon("images/characters/pinky/pinky_left.gif");           
+		}
+	}
+
+	@Override
+	public ImageIcon getSpriteInky(int i) {
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/characters/inky/inky_up.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/inky/inky_down.gif");
+		  case 2:
+			  return new ImageIcon("images/characters/inky/inky_right.gif");
+		  case 3:
+			  return new ImageIcon("images/characters/inky/inky_left.gif");
+		  case 4:
+			  return new ImageIcon("images/characters/inky/inky_killed_up.png");
+		  case 5:
+			  return new ImageIcon("images/characters/inky/inky_killed_down.png");
+		  case 6:
+			  return new ImageIcon("images/characters/inky/inky_killed_right.png");
+		  case 7:
+			  return new ImageIcon("images/characters/inky/inky_killed_left.png");
+		  case 8:
+			  return new ImageIcon("images/characters/inky/inky_danger_white.gif");
+		  case 9:
+			  return new ImageIcon("images/characters/inky/inky_danger_blue.gif");
+		  default:
+			  return new ImageIcon("images/characters/inky/inky_left.gif");           
+		}
+	}
+
+	@Override
+	public ImageIcon getSpriteClyde(int i) {
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/characters/clyde/clyde_up.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/clyde/clyde_down.gif");
+		  case 2:
+			  return new ImageIcon("images/characters/clyde/clyde_right.gif");
+		  case 3:
+			  return new ImageIcon("images/characters/clyde/clyde_left.gif");
+		  case 4:
+			  return new ImageIcon("images/characters/clyde/clyde_killed_up.png");
+		  case 5:
+			  return new ImageIcon("images/characters/clyde/clyde_killed_down.png");
+		  case 6:
+			  return new ImageIcon("images/characters/clyde/clyde_killed_right.png");
+		  case 7:
+			  return new ImageIcon("images/characters/clyde/clyde_killed_left.png");
+		  case 8:
+			  return new ImageIcon("images/characters/clyde/clyde_danger_white.gif");
+		  case 9:
+			  return new ImageIcon("images/characters/clyde/clyde_danger_blue.gif");
+		  default:
+			  return new ImageIcon("images/characters/clyde/clyde_left.gif");           
+		}
+	}
+
+	@Override
+	public ImageIcon getSpriteTile(int i) {
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/mapElement/spriteBackground.png");
+		  case 1:
+			  return new ImageIcon("images/mapElement/spriteWall.png");
+		  case 2:
+			  return new ImageIcon("images/mapElement/spriteGomme.png");
+		  case 3:
+			  return new ImageIcon("images/mapElement/spriteBigGomme.png");
+		  case 4:
+			  return new ImageIcon("images/mapElement/spriteCherry.png");
+		  default:
+			  return new ImageIcon("images/mapElement/spriteBackground.png");             
+		}
+	}
+
+	
+	@Override
+	public Image getSpriteMenuImage(int i) {
+		Image img = null;
+		switch (i)
+		{
+		  case 0:
+			  //return new Image("images/menuIcons/iconPACMAN.png");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/iconPACMAN.png"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  			  
+		  case 1:
+			  //return new Image("images/menuIcons/jrBouton.png");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/jrBouton.png"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		  case 2:
+			  //return new Image("images/menuIcons/fondJeux.jpg");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/fondJeux.jpg"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		  case 3:
+			  //return new Image("images/menuIcons/titrePacman.png");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/titrePacman.png"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		  case 4:
+			  //return new Image("images/menuIcons/pacmanGIF.gif");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/pacmanGIF.gif"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		  case 5:
+			  //return new Image("images/menuIcons/fantomeGIF.gif"); 
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/fantomeGIF.gif"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		  case 6:
+			  //return new Image("images/menuIcons/pacmanGIF2.gif");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/pacmanGIF2.gif"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		  default :
+			  //return new Image("images/menuIcons/iconPACMAN.png");
+			  try {
+					img = ImageIO.read( new File("images/menuIcons/iconPACMAN.png"));
+			  }
+			  catch (IOException e) {
+					e.printStackTrace();
+			  }
+			  return img;
+			  
+		}
+	}
+	@Override
+	public String[][] getHighccores(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRules(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ImageIcon getSpriteMenu(int i) {
+		
+		switch (i)
+		{
+		  case 0:
+			  return new ImageIcon("images/menuIcons/iconPACMAN.png");
+			
+			  			  
+		  case 1:
+			  return new ImageIcon("images/menuIcons/jrBouton.png");
+			  
+			  
+		  case 2:
+			  return new ImageIcon("images/menuIcons/fondJeux.jpg");
+			 
+			  
+		  case 3:
+			  return new ImageIcon("images/menuIcons/titrePacman.png");
+			  
+			  
+		  case 4:
+			  return new ImageIcon("images/menuIcons/pacmanGIF.gif");
+			 
+			  
+		  case 5:
+			  return new ImageIcon("images/menuIcons/fantomeGIF.gif"); 
+			  
+			  
+		  case 6:
+			  return new ImageIcon("images/menuIcons/pacmanGIF2.gif");
+			 
+			  
+		  default :
+			  return new ImageIcon("images/menuIcons/iconPACMAN.png");
+			 
+			  
+		}
+	}
+}
