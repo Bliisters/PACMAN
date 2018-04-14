@@ -184,40 +184,45 @@ public class Mapi {
 			int y = this.Blinky.getPosy();
 			int x1=0;
 			int y1=0;
+			int C=0;
 			while(possiblemove(x1,y1)==false) {
-				
-				int C=(int)(Math.random()*4);
-				while(C==4){
+				C=(int)(Math.random()*4);	
+				int L = this.Blinky.getLastMove();
+				while(C==4 || C==L){
 					C=(int)(Math.random()*4);
 				}
 				
+				
 				//int C=1;
 				//move left
-				if(C==0) {
+				if(C==0 ) {
+					System.out.println("C : "+C+"   et L : "+L);
 					x1=x;
 					y1=y-1;
 				}
 				//right
 				else if(C==1) {
+					System.out.println("C : "+C+"   et L : "+L);
 					x1=x;
 					y1=y+1;
 				}
 				//UP
 				else if(C==2) {
+					System.out.println("C : "+C+"   et L : "+L);
 					x1=x-1;
 					y1=y;
 				}
 				//DOWN
 				else if(C==3) {
+					System.out.println("C : "+C+"   et L : "+L);
 					x1=x+1;
 					y1=y;
 				}
 			}
 			this.map[x1][y1][1]=Blinky;
+			this.Blinky.setLastMove(C);
 			this.Blinky.setPos(x1, y1);
-			this.map[x][y][1]=null;
-			
-			
+			this.map[x][y][1]=null;			
 		}
 
 }
