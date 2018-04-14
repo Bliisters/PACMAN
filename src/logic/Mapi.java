@@ -16,6 +16,9 @@ public class Mapi {
 	private Element[][][] map = new Element[mapHeight][mapWidth][2];
 	private Pacman pacman;
 	private Blinky Blinky;
+	private Inky	Inky;
+	private Pinky Pinky;
+	private Clyde Clyde;
 	private int score=0;
 	Background background = new Background(data.getSpriteTile(0));
 	Block bloc= new Block(data.getSpriteTile(1));
@@ -61,6 +64,24 @@ public class Mapi {
 					map[i][j][1]=Blinky;
 					map[i][j][0]=background;
 				}
+				else if(ini[i][j]==7) {
+					/**Inky !!!! **/
+					Inky = new Inky(i,j,data.getSpriteInky(1));
+					map[i][j][1]=Inky;
+					map[i][j][0]=background;
+				}
+				else if(ini[i][j]==8) {
+					/**Pinky !!!! **/
+					Pinky = new Pinky(i,j,data.getSpritePinky(1));
+					map[i][j][1]=Pinky;
+					map[i][j][0]=background;
+				}
+				else if(ini[i][j]==9) {
+					/**Clyde !!!! **/
+					Clyde = new Clyde(i,j,data.getSpriteClyde(1));
+					map[i][j][1]=Clyde;
+					map[i][j][0]=background;
+				}
 				
 			}
 		}
@@ -69,7 +90,10 @@ public class Mapi {
 	
 	public ImageIcon[][] getTableau(String key){
 		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
-		moveBlinky();
+		moveGhost(this.Blinky);
+		moveGhost(this.Inky);
+		moveGhost(this.Pinky);
+		moveGhost(this.Clyde);
 		movePACMAN(key);
 		for(int i=0;i<mapHeight;i++) {
 			for(int j=0 ;j<mapWidth;j++) {
@@ -179,50 +203,46 @@ public class Mapi {
 			return this.score;
 		}
 		
-		public void moveBlinky() {
-			int x = this.Blinky.getPosx();
-			int y = this.Blinky.getPosy();
+		public void moveGhost(Ghost F) {
+			int x = F.getPosx();
+			int y = F.getPosy();
+			int L = F.getLastMove();
 			int x1=0;
 			int y1=0;
 			int C=0;
+
+			
+			if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x+1,y)==false) {L=3;}
+			else if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x-1,y)==false) {L=2;}
+			else if(possiblemove(x,y+1)==false && possiblemove(x-1,y)==false && possiblemove(x+1,y)==false) {L=1;}
+			else if(possiblemove(x,y-1)==false && possiblemove(x-1,y)==false && possiblemove(x+1,y)==false) {L=0;}
+			
 			while(possiblemove(x1,y1)==false) {
 				C=(int)(Math.random()*4);	
-				int L = this.Blinky.getLastMove();
 				while(C==4 || C==L){
 					C=(int)(Math.random()*4);
-				}
+				}				
 				
-				
-				//int C=1;
 				//move left
-				if(C==0 ) {
-					System.out.println("C : "+C+"   et L : "+L);
-					x1=x;
-					y1=y-1;
-				}
+				if(C==0 ) {x1=x; y1=y-1;}
+				
 				//right
-				else if(C==1) {
-					System.out.println("C : "+C+"   et L : "+L);
-					x1=x;
-					y1=y+1;
-				}
+				else if(C==1) {x1=x; y1=y+1;}
+					
 				//UP
-				else if(C==2) {
-					System.out.println("C : "+C+"   et L : "+L);
-					x1=x-1;
-					y1=y;
-				}
+				else if(C==2) {x1=x-1; y1=y;}
+				
 				//DOWN
-				else if(C==3) {
-					System.out.println("C : "+C+"   et L : "+L);
-					x1=x+1;
-					y1=y;
-				}
+				else if(C==3) {x1=x+1; y1=y;}
+				
 			}
-			this.map[x1][y1][1]=Blinky;
-			this.Blinky.setLastMove(C);
-			this.Blinky.setPos(x1, y1);
-			this.map[x][y][1]=null;			
+			this.map[x1][y1][1]=F;
+			F.setLastMove(C);
+			F.setPos(x1, y1);
+			if(this.map[x][y][1]==F) {
+				this.map[x][y][1]=null;
+			}
+						
 		}
 
 }
