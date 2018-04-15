@@ -1,5 +1,6 @@
 package logic;
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 
@@ -8,9 +9,15 @@ import data.Data;
 public class LogicGetters implements Logic{
 	
 	Data d;
+	Mapi m;
+	
+	public ImageIcon[][] getTableau(String key){
+		return m.getTableau(key);
+	}
 	
 	public LogicGetters(){
 		d = new Data();
+		m=new Mapi();
 	}
 
 	@Override
@@ -48,6 +55,30 @@ public class LogicGetters implements Logic{
 	@Override
 	public ImageIcon getSpriteMenu(int i) {
 		return d.getSpriteMenu(i);
+	}
+
+	@Override
+	public int getNbPixelSprite() {
+		return d.getNbPixelSprite();
+	}
+
+	@Override
+	public int getNbLife() {
+		return m.getNbLife();
+	}
+
+	@Override
+	public int getNbLifeMax(int i) {
+		return d.getNbLifeMax(i);
+	}
+	
+	public int getScore(){
+		return m.getScore();
+	}
+
+	@Override
+	public File getMusicFile(int i) {
+		return d.getMusicFile(i);
 	}
 
 }

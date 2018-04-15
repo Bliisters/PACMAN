@@ -34,9 +34,9 @@ public class Accueil extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
-	LogicGetters logicget = new LogicGetters();
+	LogicGetters l = new LogicGetters();
 
-	Audio son=new Audio();
+	Audio son;
     
 	CardLayout cl;
 	Bouton boutJouer;
@@ -72,6 +72,8 @@ public class Accueil extends JFrame implements ActionListener {
 
     
 	public Accueil (){
+		
+		son=new Audio(0);
 
 		son.start();
 
@@ -84,21 +86,21 @@ public class Accueil extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.setIconImage(new ImageIcon("images/iconPACMAN.png").getImage());
+		this.setIconImage(l.getSpriteMenuImage(0));
 		
 		//Création des boutons
-		boutJouer = new Bouton("Jouer", 400,40,logicget.getSpriteMenuImage(1));
-		boutScore = new Bouton("Highscores", 400,40,logicget.getSpriteMenuImage(1));
-		boutRetour = new Bouton("Retour",400,40,logicget.getSpriteMenuImage(1));
-		boutAnnuler = new Bouton("Annuler",400,40,logicget.getSpriteMenuImage(1));
-		boutValidation = new Bouton("Valider", 400,40,logicget.getSpriteMenuImage(1));
+		boutJouer = new Bouton("Jouer", 400,40,l.getSpriteMenuImage(1));
+		boutScore = new Bouton("Highscores", 400,40,l.getSpriteMenuImage(1));
+		boutRetour = new Bouton("Retour",400,40,l.getSpriteMenuImage(1));
+		boutAnnuler = new Bouton("Annuler",400,40,l.getSpriteMenuImage(1));
+		boutValidation = new Bouton("Valider", 400,40,l.getSpriteMenuImage(1));
 
 		//Création des JPanel ou plus pécisement des Panneaux.
 		container = new JPanel();
-		panPrincipal = new Panneau(logicget.getSpriteMenuImage(2));
-		panJouer = new Panneau(logicget.getSpriteMenuImage(2));
-		panScore = new Panneau(logicget.getSpriteMenuImage(2));
-		panScore = new Panneau(logicget.getSpriteMenuImage(2));
+		panPrincipal = new Panneau(l.getSpriteMenuImage(2));
+		panJouer = new Panneau(l.getSpriteMenuImage(2));
+		panScore = new Panneau(l.getSpriteMenuImage(2));
+		panScore = new Panneau(l.getSpriteMenuImage(2));
 		fondPseudo= new JPanel();
 		fondPseudo.setBackground(Color.yellow);
 		fondScore= new JPanel();
@@ -123,13 +125,13 @@ public class Accueil extends JFrame implements ActionListener {
 		boutScore.addActionListener(this);
 		
 		//Création des JLabels pour les images. 
-		logo = new JLabel(logicget.getSpriteMenu(3));
+		logo = new JLabel(l.getSpriteMenu(3));
 		logo.setSize(408, 232);
-		logoAnime = new JLabel(logicget.getSpriteMenu(4));
+		logoAnime = new JLabel(l.getSpriteMenu(4));
 		logoAnime.setSize(340, 325);
-		logoAnime_2 = new JLabel(logicget.getSpriteMenu(5));
+		logoAnime_2 = new JLabel(l.getSpriteMenu(5));
 		logoAnime_2.setSize(340, 325);
-		logoAnime_PACMAN = new JLabel(logicget.getSpriteMenu(6));
+		logoAnime_PACMAN = new JLabel(l.getSpriteMenu(6));
 		logoAnime_PACMAN.setSize(15, 15);
 		
 		//Création des JLabels pour les textes fixes.

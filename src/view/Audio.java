@@ -3,6 +3,8 @@ package view;
 //On importe tout ce qui va être utile pour la classe.
 import  java.io.*;
 import javax.sound.sampled.*;
+
+import logic.LogicGetters;
  
 
 //////////////////////////////////////////////////////////////////////
@@ -18,9 +20,15 @@ public class Audio extends Thread{
 	
     AudioInputStream audioInputStream = null;
     SourceDataLine line;
+    LogicGetters l = new LogicGetters();
+    File music;
+    
+    public Audio(int i){
+    	this.music=l.getMusicFile(i);
+    }
     
     public void run(){
-        File fichier = new File("music/themePACMAN.wav");
+        File fichier = music;
         /*try {
         AudioFileFormat format = AudioSystem.getAudioFileFormat(fichier);
         } catch (UnsupportedAudioFileException e1) {

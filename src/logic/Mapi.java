@@ -269,5 +269,10 @@ public class Mapi {
 			}
 						
 		}
+		
+		public int getNbLife(){
+			if(this.vie<1){return 1;}
+			else{return this.vie;}
+		}
 
 }

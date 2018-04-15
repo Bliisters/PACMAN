@@ -1,6 +1,7 @@
 package data;
 
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 
@@ -221,5 +222,11 @@ public interface DataGetters {
      * @return a int tab of rules like LifePoints
      */
 	public int[] getRules(int i);
+	
+	public int getNbPixelSprite();
+	
+	public int getNbLifeMax(int i);
+	
+	public File getMusicFile(int i);
 
 }

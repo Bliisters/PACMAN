@@ -371,7 +371,7 @@ public class Data implements DataGetters{
 		switch (i)
 		{
 		  case 0:
-			  return new ImageIcon("images/menuIcons/iconPACMAN.png");
+			  return new ImageIcon("images/menuIcons/pacmanLife.png");
 			
 			  			  
 		  case 1:
@@ -384,6 +384,10 @@ public class Data implements DataGetters{
 			  
 		  case 3:
 			  return new ImageIcon("images/menuIcons/titrePacman.png");
+			  
+			  
+		  case 31:
+			  return new ImageIcon("images/menuIcons/titrePacmanGame.png");
 			  
 			  
 		  case 4:
@@ -399,9 +403,43 @@ public class Data implements DataGetters{
 			 
 			  
 		  default :
-			  return new ImageIcon("images/menuIcons/iconPACMAN.png");
+			  return new ImageIcon("images/menuIcons/pacmanLife.png");
 			 
 			  
 		}
+	}
+
+	@Override
+	public int getNbPixelSprite() {
+		return 32;
+	}
+
+	@Override
+	public int getNbLifeMax(int i) {
+		return 3;
+	}
+
+	@Override
+	public File getMusicFile(int i) {
+		
+		switch (i)
+		{
+		  case 0:
+			  return new File("music/themePACMAN.wav");
+			
+			  			  
+		  case 1:
+			  return new File("music/themeGAME.wav");
+			  
+			  
+		  case 2:
+			  return new File("music/themeGAME.wav");
+			  
+			  
+		  default :
+			  return new File("music/themeGAME.wav");
+			  
+		}
+		
 	}
 }
