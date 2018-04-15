@@ -20,6 +20,7 @@ public class Mapi {
 	private Pinky Pinky;
 	private Clyde Clyde;
 	private int score=0;
+	private int vie=3;
 	Background background = new Background(data.getSpriteTile(0));
 	Block bloc= new Block(data.getSpriteTile(1));
 	Gomme gomme = new Gomme(data.getSpriteTile(2));
@@ -95,6 +96,35 @@ public class Mapi {
 		moveGhost(this.Pinky);
 		moveGhost(this.Clyde);
 		movePACMAN(key);
+		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {	//retour au départ si Pacman touche un fantome
+			
+			this.vie=this.vie-1;
+			
+			//PAC-MAN : 
+			this.map[this.pacman.getPosx()][this.pacman.getPosy()][0]=background;
+			this.map[this.pacman.getPosIniX()][this.pacman.getPosIniY()][0]=this.pacman;
+			this.pacman.setPos(this.pacman.getPosIniX(), this.pacman.getPosIniY());
+			
+			//Blinky
+			this.map[this.Blinky.getPosx()][this.Blinky.getPosy()][1]=null;
+			this.map[this.Blinky.getPosIniX()][this.Blinky.getPosIniY()][1]=this.Blinky;
+			this.Blinky.setPos(this.Blinky.getPosIniX(), this.Blinky.getPosIniY());
+			
+			//Inky
+			this.map[this.Inky.getPosx()][this.Inky.getPosy()][1]=null;
+			this.map[this.Inky.getPosIniX()][this.Inky.getPosIniY()][1]=this.Inky;
+			this.Inky.setPos(this.Inky.getPosIniX(), this.Inky.getPosIniY());
+			
+			//Pinky
+			this.map[this.Pinky.getPosx()][this.Pinky.getPosy()][1]=null;
+			this.map[this.Pinky.getPosIniX()][this.Pinky.getPosIniY()][1]=this.Pinky;
+			this.Pinky.setPos(this.Pinky.getPosIniX(), this.Pinky.getPosIniY());
+			
+			//Clyde
+			this.map[this.Clyde.getPosx()][this.Clyde.getPosy()][1]=null;
+			this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
+			this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
+		}
 		for(int i=0;i<mapHeight;i++) {
 			for(int j=0 ;j<mapWidth;j++) {
 				if(map[i][j][1]==null) {
@@ -168,29 +198,24 @@ public class Mapi {
 		}
 		
 		private void move(int x, int y, int dx, int dy) {
-			System.out.println("rentré move");
 			if(this.map[dx][dy][0].equals(background)) {
-				System.out.println("rentré b"+score);
 				this.map[dx][dy][0]=pacman;
 				this.pacman.setPos(dx, dy);
 				this.map[x][y][0]=background;
 			}
 			if(this.map[dx][dy][0].equals(gomme)) {
-				System.out.println("rentré g");
 				this.map[dx][dy][0]=pacman;
 				this.pacman.setPos(dx, dy);
 				this.map[x][y][0]=background;
 				this.score=this.score+10;
 			}
 			if(this.map[dx][dy][0].equals(supergomme)) {
-				System.out.println("rentré sg");
 				this.map[dx][dy][0]=pacman;
 				this.pacman.setPos(dx, dy);
 				this.map[x][y][0]=background;
 				this.score=this.score+50;
 			}
 			if(this.map[dx][dy][0].equals(fruit)) {
-				System.out.println("rentré f");
 				this.map[dx][dy][0]=pacman;
 				this.pacman.setPos(dx, dy);
 				this.map[x][y][0]=background;
@@ -212,7 +237,7 @@ public class Mapi {
 			int C=0;
 
 			
-			if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x+1,y)==false) {L=3;}
+			if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x+1,y)==false) {L=3;}			//Mouvement si impasse
 			else if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x-1,y)==false) {L=2;}
 			else if(possiblemove(x,y+1)==false && possiblemove(x-1,y)==false && possiblemove(x+1,y)==false) {L=1;}
 			else if(possiblemove(x,y-1)==false && possiblemove(x-1,y)==false && possiblemove(x+1,y)==false) {L=0;}
