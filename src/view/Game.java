@@ -1,6 +1,8 @@
 package view;
 
 import logic.LogicGetters;
+
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,14 +15,18 @@ import javax.swing.JPanel;
 public class Game extends JFrame{
 	
 	LogicGetters l;
+	
+	CardLayout cl;
 
 	private static final long serialVersionUID = 1L;
 	Dimension dimFenetre;
 	int widthFenetre;
 	int heightFenetre;
 
+	JPanel container;
 	JPanel panPrincipal;
 	JPanel panGame;
+	JPanel panWin;
 	Panneau panStats;
 
 	JLabel logo;
@@ -57,6 +63,8 @@ public class Game extends JFrame{
 	public Game(int level){
 		
 		l=new LogicGetters();
+		
+		cl = new CardLayout();
 		
 		son = new Audio(level);
 		
@@ -121,6 +129,15 @@ public class Game extends JFrame{
 		panGame.setSize(nbPixelSprite*nbCasesWidth,nbPixelSprite*nbCasesHeight);
 		panStats=new Panneau("images/fondBoutonGris.jpg");
 		panStats.setSize(panPrincipal.getWidth()-2*espacement,panPrincipal.getHeight()-(panGame.getHeight()+logo.getHeight()+4*espacement));
+		panWin=new JPanel();
+		panWin.setBackground(Color.black);
+		panWin.setSize(nbPixelSprite*nbCasesWidth,nbPixelSprite*nbCasesHeight);
+		
+		container = new JPanel();
+		container.setLayout(cl);
+		container.add(panGame,"GAME");
+		container.add(panWin,"WIN");
+		cl.first(container);
 		
 		panPrincipal.add(logo);
 		logo.setBounds((panPrincipal.getWidth()/2)-(logo.getWidth()/2),espacement, logo.getWidth(), logo.getHeight());
@@ -135,8 +152,13 @@ public class Game extends JFrame{
 		font = new Font("Arial",Font.BOLD,20);
 		score.setFont(font);
 		
-		panPrincipal.add(panGame);
-		panGame.setBounds(espacement,2*espacement+logo.getHeight(),panGame.getWidth(),panGame.getHeight());
+		int taille=200;
+		JLabel Win = new JLabel(l.getSpriteMenu(100));
+		panWin.add(Win);
+		Win.setBounds((panGame.getWidth()/2-taille/2),(panGame.getHeight()/2-taille/2),taille,taille);
+		
+		panPrincipal.add(container);
+		container.setBounds(espacement,2*espacement+logo.getHeight(),panGame.getWidth(),panGame.getHeight());
 		panGame.setLayout(null);
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
@@ -170,6 +192,9 @@ public class Game extends JFrame{
 			Life[i].setBounds(panStats.getWidth()-((i+1)*espacement+(i+1)*Life[i].getWidth()),espacement , Life[i].getWidth(), Life[i].getHeight());
 			System.out.println(i);
 		}
+		
+		this.setContentPane(panPrincipal);
+		
 	}
 	
 	public String getKey(){
@@ -189,6 +214,10 @@ public class Game extends JFrame{
 		this.refresh();
 		this.getContentPane().repaint();
 		
+		if(l.checkFinish()){
+			cl.show(container, "WIN");
+		}
+		
 	}
 	
 	public void moveDown() throws InterruptedException{
@@ -204,6 +233,10 @@ public class Game extends JFrame{
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
+		
+		if(l.checkFinish()){
+			cl.show(container, "WIN");
+		}
 	}
 	
 	public void moveLeft() throws InterruptedException{
@@ -219,6 +252,10 @@ public class Game extends JFrame{
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
+		
+		if(l.checkFinish()){
+			cl.show(container, "WIN");
+		}
 	}
 	
 	public void moveRight() throws InterruptedException{
@@ -234,6 +271,10 @@ public class Game extends JFrame{
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
+		
+		if(l.checkFinish()){
+			cl.show(container, "WIN");
+		}
 	}
 	
 	public void refresh(){

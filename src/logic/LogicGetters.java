@@ -81,4 +81,9 @@ public class LogicGetters implements Logic{
 		return d.getMusicFile(i);
 	}
 
+	@Override
+	public boolean checkFinish() {
+		return m.checkFinish();
+	}
+
 }

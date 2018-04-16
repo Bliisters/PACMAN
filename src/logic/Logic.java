@@ -33,4 +33,6 @@ public interface Logic {
 	
 	public File getMusicFile(int i);
 	
+	public boolean checkFinish();
+	
 }

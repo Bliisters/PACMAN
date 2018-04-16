@@ -400,6 +400,10 @@ public class Data implements DataGetters{
 			  
 		  case 6:
 			  return new ImageIcon("images/menuIcons/pacmanGIF2.gif");
+			  
+			  
+		  case 100:
+			  return new ImageIcon("images/menuIcons/panWinTest.png");
 			 
 			  
 		  default :

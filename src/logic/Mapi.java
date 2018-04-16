@@ -16,7 +16,7 @@ public class Mapi {
 	private Element[][][] map = new Element[mapHeight][mapWidth][2];
 	private Pacman pacman;
 	private Blinky Blinky;
-	private Inky	Inky;
+	private Inky Inky;
 	private Pinky Pinky;
 	private Clyde Clyde;
 	private int score=0;
@@ -90,11 +90,15 @@ public class Mapi {
 	}
 	
 	public ImageIcon[][] getTableau(String key){
+		if(key.equals("INIT")){}
+		else{
+			moveGhost(this.Blinky);
+			moveGhost(this.Inky);
+			moveGhost(this.Pinky);
+			moveGhost(this.Clyde);
+		}
+		
 		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
-		moveGhost(this.Blinky);
-		moveGhost(this.Inky);
-		moveGhost(this.Pinky);
-		moveGhost(this.Clyde);
 		boolean choc=movePACMAN(key);
 		if(choc) {	//retour au départ si Pacman touche un fantome
 			
@@ -138,6 +142,7 @@ public class Mapi {
 		}
 		return im;
 	}
+	
 	private boolean movePACMAN(String k) {
 		boolean choc=false;
 		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {choc=true;}
@@ -277,6 +282,18 @@ public class Mapi {
 		public int getNbLife(){
 			if(this.vie<1){return 1;}
 			else{return this.vie;}
+		}
+		public boolean checkFinish(){
+			int cpt=0;
+			for(int i=0;i<mapHeight;i++) {
+				for(int j=0;j<mapWidth;j++){
+					if(map[i][j][0].equals(gomme) || map[i][j].equals(supergomme)){
+						cpt++;
+					}
+				}
+			}
+			if(cpt>0){return false;}
+			else{return true;}
 		}
 
 }
