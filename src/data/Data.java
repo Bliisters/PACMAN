@@ -117,13 +117,13 @@ public class Data implements DataGetters{
 	public ImageIcon getSpritePacMan(int i) {
 		switch (i)
 		{
-		  case 0:
-			  return new ImageIcon("images/characters/pacman/pacmanGIFHv2.gif");
-		  case 1:
-			  return new ImageIcon("images/characters/pacman/pacmanGIFBv2.gif");
 		  case 2:
-			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");
+			  return new ImageIcon("images/characters/pacman/pacmanGIFHv2.gif");
 		  case 3:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFBv2.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");
+		  case 0:
 			  return new ImageIcon("images/characters/pacman/pacmanGIFGv2.gif");
 		  default:
 			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");             
@@ -134,21 +134,21 @@ public class Data implements DataGetters{
 	public ImageIcon getSpriteBlinky(int i) {
 		switch (i)
 		{
-		  case 0:
-			  return new ImageIcon("images/characters/blinky/blinky_up.gif");
-		  case 1:
-			  return new ImageIcon("images/characters/blinky/blinky_down.gif");
 		  case 2:
-			  return new ImageIcon("images/characters/blinky/blinky_right.gif");
+			  return new ImageIcon("images/characters/blinky/blinky_up.gif");
 		  case 3:
+			  return new ImageIcon("images/characters/blinky/blinky_down.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/blinky/blinky_right.gif");
+		  case 0:
 			  return new ImageIcon("images/characters/blinky/blinky_left.gif");
-		  case 4:
-			  return new ImageIcon("images/characters/blinky/blinky_killed_up.png");
-		  case 5:
-			  return new ImageIcon("images/characters/blinky/blinky_killed_down.png");
 		  case 6:
-			  return new ImageIcon("images/characters/blinky/blinky_killed_right.png");
+			  return new ImageIcon("images/characters/blinky/blinky_killed_up.png");
 		  case 7:
+			  return new ImageIcon("images/characters/blinky/blinky_killed_down.png");
+		  case 5:
+			  return new ImageIcon("images/characters/blinky/blinky_killed_right.png");
+		  case 4:
 			  return new ImageIcon("images/characters/blinky/blinky_killed_left.png");
 		  case 8:
 			  return new ImageIcon("images/characters/blinky/blinky_danger_white.gif");
@@ -163,21 +163,21 @@ public class Data implements DataGetters{
 	public ImageIcon getSpritePinky(int i) {
 		switch (i)
 		{
-		  case 0:
-			  return new ImageIcon("images/characters/pinky/pinky_up.gif");
-		  case 1:
-			  return new ImageIcon("images/characters/pinky/pinky_down.gif");
 		  case 2:
-			  return new ImageIcon("images/characters/pinky/pinky_right.gif");
+			  return new ImageIcon("images/characters/pinky/pinky_up.gif");
 		  case 3:
+			  return new ImageIcon("images/characters/pinky/pinky_down.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/pinky/pinky_right.gif");
+		  case 0:
 			  return new ImageIcon("images/characters/pinky/pinky_left.gif");
-		  case 4:
-			  return new ImageIcon("images/characters/pinky/pinky_killed_up.png");
-		  case 5:
-			  return new ImageIcon("images/characters/pinky/pinky_killed_down.png");
 		  case 6:
-			  return new ImageIcon("images/characters/pinky/pinky_killed_right.png");
+			  return new ImageIcon("images/characters/pinky/pinky_killed_up.png");
 		  case 7:
+			  return new ImageIcon("images/characters/pinky/pinky_killed_down.png");
+		  case 5:
+			  return new ImageIcon("images/characters/pinky/pinky_killed_right.png");
+		  case 4:
 			  return new ImageIcon("images/characters/pinky/pinky_killed_left.png");
 		  case 8:
 			  return new ImageIcon("images/characters/pinky/pinky_danger_white.gif");
@@ -192,21 +192,21 @@ public class Data implements DataGetters{
 	public ImageIcon getSpriteInky(int i) {
 		switch (i)
 		{
-		  case 0:
-			  return new ImageIcon("images/characters/inky/inky_up.gif");
-		  case 1:
-			  return new ImageIcon("images/characters/inky/inky_down.gif");
 		  case 2:
-			  return new ImageIcon("images/characters/inky/inky_right.gif");
+			  return new ImageIcon("images/characters/inky/inky_up.gif");
 		  case 3:
+			  return new ImageIcon("images/characters/inky/inky_down.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/inky/inky_right.gif");
+		  case 0:
 			  return new ImageIcon("images/characters/inky/inky_left.gif");
-		  case 4:
-			  return new ImageIcon("images/characters/inky/inky_killed_up.png");
-		  case 5:
-			  return new ImageIcon("images/characters/inky/inky_killed_down.png");
 		  case 6:
-			  return new ImageIcon("images/characters/inky/inky_killed_right.png");
+			  return new ImageIcon("images/characters/inky/inky_killed_up.png");
 		  case 7:
+			  return new ImageIcon("images/characters/inky/inky_killed_down.png");
+		  case 5:
+			  return new ImageIcon("images/characters/inky/inky_killed_right.png");
+		  case 4:
 			  return new ImageIcon("images/characters/inky/inky_killed_left.png");
 		  case 8:
 			  return new ImageIcon("images/characters/inky/inky_danger_white.gif");
@@ -221,21 +221,21 @@ public class Data implements DataGetters{
 	public ImageIcon getSpriteClyde(int i) {
 		switch (i)
 		{
-		  case 0:
-			  return new ImageIcon("images/characters/clyde/clyde_up.gif");
-		  case 1:
-			  return new ImageIcon("images/characters/clyde/clyde_down.gif");
 		  case 2:
-			  return new ImageIcon("images/characters/clyde/clyde_right.gif");
+			  return new ImageIcon("images/characters/clyde/clyde_up.gif");
 		  case 3:
+			  return new ImageIcon("images/characters/clyde/clyde_down.gif");
+		  case 1:
+			  return new ImageIcon("images/characters/clyde/clyde_right.gif");
+		  case 0:
 			  return new ImageIcon("images/characters/clyde/clyde_left.gif");
-		  case 4:
-			  return new ImageIcon("images/characters/clyde/clyde_killed_up.png");
-		  case 5:
-			  return new ImageIcon("images/characters/clyde/clyde_killed_down.png");
 		  case 6:
-			  return new ImageIcon("images/characters/clyde/clyde_killed_right.png");
+			  return new ImageIcon("images/characters/clyde/clyde_killed_up.png");
 		  case 7:
+			  return new ImageIcon("images/characters/clyde/clyde_killed_down.png");
+		  case 5:
+			  return new ImageIcon("images/characters/clyde/clyde_killed_right.png");
+		  case 4:
 			  return new ImageIcon("images/characters/clyde/clyde_killed_left.png");
 		  case 8:
 			  return new ImageIcon("images/characters/clyde/clyde_danger_white.gif");
