@@ -9,11 +9,11 @@ import data.Data;
 public class Mapi {
 	
 	private Data data = new Data();
-	private int level = 1;
-	int mapWidth = data.getMapiWidth(level);
-	int mapHeight = data.getMapiHeight(level);
+	private int level;
+	int mapWidth;
+	int mapHeight;
 	
-	private Element[][][] map = new Element[mapHeight][mapWidth][2];
+	private Element[][][] map;
 	private Pacman pacman;
 	private Blinky Blinky;
 	private Inky Inky;
@@ -28,7 +28,12 @@ public class Mapi {
 	Fruit fruit = new Fruit(data.getSpriteTile(4));
 
 	
-	public Mapi() {
+	public Mapi(int level) {
+		this.level=level;
+		mapWidth = data.getMapiWidth(level);
+		mapHeight = data.getMapiHeight(level);
+		map = new Element[mapHeight][mapWidth][2];
+		
 		int[][] ini=data.getTableau(level);
 			System.out.println(ini.length+"  "+ini[0].length+"  "+map.length+"  "+map[0].length);
 		for(int i=0;i<mapHeight;i++) {

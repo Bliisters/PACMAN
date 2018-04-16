@@ -403,7 +403,7 @@ public class Data implements DataGetters{
 			  
 			  
 		  case 100:
-			  return new ImageIcon("images/menuIcons/panWinTest.png");
+			  return new ImageIcon("images/menuIcons/fondWinTest.png");
 			 
 			  
 		  default :

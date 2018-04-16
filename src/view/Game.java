@@ -31,6 +31,7 @@ public class Game extends JFrame{
 
 	JLabel logo;
 	JLabel score;
+	JLabel scoreWin;
 	
 	Audio son;
 	Listener listener;
@@ -57,12 +58,16 @@ public class Game extends JFrame{
 	
 	Font font;
 	
+	int level;
+	
 	public String currentKey="";
 	
 	
 	public Game(int level){
 		
-		l=new LogicGetters();
+		this.level=level;
+		
+		l=new LogicGetters(level);
 		
 		cl = new CardLayout();
 		
@@ -152,10 +157,16 @@ public class Game extends JFrame{
 		font = new Font("Arial",Font.BOLD,20);
 		score.setFont(font);
 		
+		panWin.setLayout(null);
 		int taille=200;
 		JLabel Win = new JLabel(l.getSpriteMenu(100));
 		panWin.add(Win);
 		Win.setBounds((panGame.getWidth()/2-taille/2),(panGame.getHeight()/2-taille/2),taille,taille);
+		scoreWin = new JLabel("Score Final : "+l.getScore());
+		scoreWin.setSize(taille,taille/4);
+		panWin.add(scoreWin);
+		scoreWin.setBounds(0,0,scoreWin.getWidth(),scoreWin.getHeight());
+		scoreWin.setFont(font);
 		
 		panPrincipal.add(container);
 		container.setBounds(espacement,2*espacement+logo.getHeight(),panGame.getWidth(),panGame.getHeight());
@@ -214,9 +225,7 @@ public class Game extends JFrame{
 		this.refresh();
 		this.getContentPane().repaint();
 		
-		if(l.checkFinish()){
-			cl.show(container, "WIN");
-		}
+		this.checkFinish();
 		
 	}
 	
@@ -234,9 +243,7 @@ public class Game extends JFrame{
 		this.refresh();
 		this.getContentPane().repaint();
 		
-		if(l.checkFinish()){
-			cl.show(container, "WIN");
-		}
+		this.checkFinish();
 	}
 	
 	public void moveLeft() throws InterruptedException{
@@ -253,9 +260,7 @@ public class Game extends JFrame{
 		this.refresh();
 		this.getContentPane().repaint();
 		
-		if(l.checkFinish()){
-			cl.show(container, "WIN");
-		}
+		this.checkFinish();
 	}
 	
 	public void moveRight() throws InterruptedException{
@@ -272,9 +277,7 @@ public class Game extends JFrame{
 		this.refresh();
 		this.getContentPane().repaint();
 		
-		if(l.checkFinish()){
-			cl.show(container, "WIN");
-		}
+		this.checkFinish();
 	}
 	
 	public void refresh(){
@@ -313,10 +316,36 @@ public class Game extends JFrame{
 		panStats.add(score);
 		score.setBounds(espacement,espacement,score.getWidth(),score.getHeight());
 		score.setFont(font);
+		
+		int taille=200;
+		panWin.remove(scoreWin);
+		scoreWin = new JLabel("Score Final : "+l.getScore());
+		scoreWin.setSize(taille,taille/4);
+		panWin.add(scoreWin);
+		scoreWin.setBounds(0,0,scoreWin.getWidth(),scoreWin.getHeight());
+		scoreWin.setFont(font);
 	}
 	
 	public void refreshLife(){
 		nbLife=l.getNbLife();
 		panStats.remove(Life[nbLife-1]);		
 	}
+	
+	public void newLevel(){
+		this.dispose();
+		new Game(level+1);
+	}
+	
+	public boolean checkWin(){
+		return l.checkFinish();
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void checkFinish(){
+		if(l.checkFinish()){
+			cl.show(container, "WIN");
+			this.son.stop();
+		}
+	}
+
 }

@@ -20,7 +20,7 @@ public class Audio extends Thread{
 	
     AudioInputStream audioInputStream = null;
     SourceDataLine line;
-    LogicGetters l = new LogicGetters();
+    LogicGetters l = new LogicGetters(1);
     File music;
     
     public Audio(int i){

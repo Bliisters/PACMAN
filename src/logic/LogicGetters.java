@@ -15,9 +15,9 @@ public class LogicGetters implements Logic{
 		return m.getTableau(key);
 	}
 	
-	public LogicGetters(){
+	public LogicGetters(int level){
 		d = new Data();
-		m=new Mapi();
+		m = new Mapi(level);
 	}
 
 	@Override

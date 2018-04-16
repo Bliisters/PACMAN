@@ -34,7 +34,7 @@ public class Accueil extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
-	LogicGetters l = new LogicGetters();
+	LogicGetters l = new LogicGetters(1);
 
 	Audio son;
     

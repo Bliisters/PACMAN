@@ -30,7 +30,6 @@ public class Listener extends Thread implements KeyListener  {
 			try {
 				game.moveUP();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 }
@@ -41,7 +40,6 @@ public class Listener extends Thread implements KeyListener  {
 			try {
 				game.moveDown();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 }
@@ -51,7 +49,6 @@ public class Listener extends Thread implements KeyListener  {
 	 		try {
 				game.moveLeft();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	 	 }
@@ -61,10 +58,16 @@ public class Listener extends Thread implements KeyListener  {
 	  		try {
 				game.moveRight();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	  	}
+	  	
+	  	if((arg0.getKeyCode()==KeyEvent.VK_N)){
+	  		if(game.checkWin()){
+		  		game.newLevel();
+	  		}
+	  	}
+	  	
 	}
 	  	
 
