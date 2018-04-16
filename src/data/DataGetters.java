@@ -59,10 +59,10 @@ public interface DataGetters {
 	/**
      * Give the sprite
      * 
-     * 0 -> Basic Up
-	 * 1 -> Basic Down
-	 * 2 -> Basic Right
-	 * 3 -> Basic Left
+     * 0 -> Basic Left
+	 * 1 -> Basic Right
+	 * 2 -> Basic Up
+	 * 3 -> Basic Down
      * 
      * @param the value of the sprite specified in the doc
      *
@@ -76,14 +76,14 @@ public interface DataGetters {
      * 
      * @param the value of the sprite specified in the doc
      * 
-     * 0 -> Basic Up
-	 * 1 -> Basic Down
-	 * 2 -> Basic Right
-	 * 3 -> Basic Left
-	 * 4 -> Killed Up
-	 * 5 -> Killed Down
-	 * 6 -> Killed Right
-	 * 7 -> Killed Left
+     * 0 -> Basic Left
+	 * 1 -> Basic Right
+	 * 2 -> Basic Up
+	 * 3 -> Basic Down
+	 * 4 -> Killed Left
+	 * 5 -> Killed Right
+	 * 6 -> Killed Up
+	 * 7 -> Killed Down
 	 * 8 -> Danger White
 	 * 9 -> Danger Blue
      *
@@ -95,14 +95,14 @@ public interface DataGetters {
 	/**
      * Give the sprite
      * 
-     * 0 -> Basic Up
-	 * 1 -> Basic Down
-	 * 2 -> Basic Right
-	 * 3 -> Basic Left
-	 * 4 -> Killed Up
-	 * 5 -> Killed Down
-	 * 6 -> Killed Right
-	 * 7 -> Killed Left
+     * 0 -> Basic Left
+	 * 1 -> Basic Right
+	 * 2 -> Basic Up
+	 * 3 -> Basic Down
+	 * 4 -> Killed Left
+	 * 5 -> Killed Right
+	 * 6 -> Killed Up
+	 * 7 -> Killed Down
 	 * 8 -> Danger White
 	 * 9 -> Danger Blue
      * 
@@ -118,14 +118,15 @@ public interface DataGetters {
      * 
      * @param the value of the sprite specified in the doc
      * 
-     * 0 -> Basic Up
-	 * 1 -> Basic Down
-	 * 2 -> Basic Right
-	 * 3 -> Basic Left
-	 * 4 -> Killed Up
-	 * 5 -> Killed Down
-	 * 6 -> Killed Right
-	 * 7 -> Killed Left
+     * 
+	 * 0 -> Basic Left
+	 * 1 -> Basic Right
+	 * 2 -> Basic Up
+	 * 3 -> Basic Down
+	 * 4 -> Killed Left
+	 * 5 -> Killed Right
+	 * 6 -> Killed Up
+	 * 7 -> Killed Down
 	 * 8 -> Danger White
 	 * 9 -> Danger Blue
      *
@@ -139,14 +140,14 @@ public interface DataGetters {
      * 
      * @param the value of the sprite specified in the doc
      * 
-     * 0 -> Basic Up
-	 * 1 -> Basic Down
-	 * 2 -> Basic Right
-	 * 3 -> Basic Left
-	 * 4 -> Killed Up
-	 * 5 -> Killed Down
-	 * 6 -> Killed Right
-	 * 7 -> Killed Left
+     * 0 -> Basic Left
+	 * 1 -> Basic Right
+	 * 2 -> Basic Up
+	 * 3 -> Basic Down
+	 * 4 -> Killed Left
+	 * 5 -> Killed Right
+	 * 6 -> Killed Up
+	 * 7 -> Killed Down
 	 * 8 -> Danger White
 	 * 9 -> Danger Blue
      *
