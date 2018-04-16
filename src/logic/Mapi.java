@@ -295,7 +295,7 @@ public class Mapi {
 			int cpt=0;
 			for(int i=0;i<mapHeight;i++) {
 				for(int j=0;j<mapWidth;j++){
-					if(map[i][j][0].equals(gomme) || map[i][j].equals(supergomme)){
+					if(map[i][j][0].equals(gomme) || map[i][j][0].equals(supergomme)){
 						cpt++;
 					}
 				}

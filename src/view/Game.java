@@ -324,7 +324,9 @@ public class Game extends JFrame{
 		panStats.remove(Life[nbLife-1]);		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void newLevel(){
+		listener.stop();
 		this.dispose();
 		new Game(level+1);
 	}
