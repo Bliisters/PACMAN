@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 public class Game extends JFrame{
 	
 	LogicGetters l;
-	
 	CardLayout cl;
 
 	private static final long serialVersionUID = 1L;
