@@ -86,4 +86,9 @@ public class LogicGetters implements Logic{
 		return m.checkFinish();
 	}
 
+	@Override
+	public boolean checkMort() {
+		return m.checkMort();
+	}
+
 }

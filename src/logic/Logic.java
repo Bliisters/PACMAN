@@ -35,4 +35,6 @@ public interface Logic {
 	
 	public boolean checkFinish();
 	
+	public boolean checkMort();
+	
 }

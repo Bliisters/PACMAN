@@ -26,9 +26,11 @@ public class Mapi {
 	Gomme gomme = new Gomme(data.getSpriteTile(2));
 	Supergomme supergomme = new Supergomme(data.getSpriteTile(3));
 	Fruit fruit = new Fruit(data.getSpriteTile(4));
-
+	
+	boolean mort;
 	
 	public Mapi(int level) {
+		this.mort=false;
 		this.level=level;
 		mapWidth = data.getMapiWidth(this.level);
 		mapHeight = data.getMapiHeight(this.level);
@@ -105,6 +107,7 @@ public class Mapi {
 		
 		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
 		boolean choc=movePACMAN(key);
+		this.mort=choc;
 		if(choc) {	//retour au départ si Pacman touche un fantome
 			
 			this.vie=this.vie-1;
@@ -299,6 +302,10 @@ public class Mapi {
 			}
 			if(cpt>0){return false;}
 			else{return true;}
+		}
+		
+		public boolean checkMort(){
+			return this.mort;
 		}
 
 }

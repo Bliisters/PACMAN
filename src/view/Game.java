@@ -226,7 +226,6 @@ public class Game extends JFrame{
 		this.getContentPane().repaint();
 		
 		this.checkFinish();
-		
 	}
 	
 	public void moveDown() throws InterruptedException{
@@ -237,7 +236,6 @@ public class Game extends JFrame{
 		this.key_left=false;
 		
 		panGame.removeAll();
-		this.getContentPane().repaint();
 		Tab=l.getTableau("DOWN");
 		this.reset();
 		this.refresh();
@@ -254,7 +252,6 @@ public class Game extends JFrame{
 		this.key_left=true;
 		
 		panGame.removeAll();
-		this.getContentPane().repaint();
 		Tab=l.getTableau("LEFT");
 		this.reset();
 		this.refresh();
@@ -271,7 +268,6 @@ public class Game extends JFrame{
 		this.key_left=false;
 		
 		panGame.removeAll();
-		this.getContentPane().repaint();
 		Tab=l.getTableau("RIGHT");
 		this.reset();
 		this.refresh();
@@ -281,8 +277,6 @@ public class Game extends JFrame{
 	}
 	
 	public void refresh(){
-		
-		panGame.removeAll();
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
 			for(int j = 0; j <= nbCasesWidth-1; j++){
@@ -338,6 +332,10 @@ public class Game extends JFrame{
 	
 	public boolean checkWin(){
 		return l.checkFinish();
+	}
+	
+	public boolean checkMort(){
+		return l.checkMort();
 	}
 	
 	@SuppressWarnings("deprecation")
