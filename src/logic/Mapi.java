@@ -30,8 +30,8 @@ public class Mapi {
 	
 	public Mapi(int level) {
 		this.level=level;
-		mapWidth = data.getMapiWidth(level);
-		mapHeight = data.getMapiHeight(level);
+		mapWidth = data.getMapiWidth(this.level);
+		mapHeight = data.getMapiHeight(this.level);
 		map = new Element[mapHeight][mapWidth][2];
 		
 		int[][] ini=data.getTableau(level);
