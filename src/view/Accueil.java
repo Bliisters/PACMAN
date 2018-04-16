@@ -64,6 +64,8 @@ public class Accueil extends JFrame implements ActionListener {
 
     JTextField pseudo = new JTextField(20);  
     
+    JComboBox <Integer> choiceAge = new JComboBox <Integer> ();
+    
 	//////////////////////////////////////////////////////////////////////
 	//																	//
 	//					CONTRUCTEUR										//
@@ -72,6 +74,10 @@ public class Accueil extends JFrame implements ActionListener {
 
     
 	public Accueil (){
+		
+		for(int i=1; i<=2; i++){
+			choiceAge.addItem(i);
+		}
 		
 		son=new Audio(0);
 
@@ -169,6 +175,8 @@ public class Accueil extends JFrame implements ActionListener {
 		boutValidation.setBounds(640, 625, boutValidation.getLongueur(), boutValidation.getHauteur());
 		panJouer.add(boutAnnuler);
 		boutAnnuler.setBounds(140, 625, boutAnnuler.getLongueur(), boutAnnuler.getHauteur());
+		panJouer.add(choiceAge);
+		choiceAge.setBounds(10,10,50,20);
 		
 		//Parametrage du panneau panScore.
 		panScore.setLayout(null);
@@ -242,7 +250,7 @@ public class Accueil extends JFrame implements ActionListener {
 		if(arg0.getSource() == boutValidation){
 			
 			if(this.pseudo.getText().equals("")==false){
-				new Game(1);
+				new Game((int)this.choiceAge.getSelectedItem());
 				//new Jeux();
 				this.dispose();
 				son.stop();
