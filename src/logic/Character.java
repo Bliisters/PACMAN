@@ -38,5 +38,7 @@ public abstract class Character extends Element {
 		this.x=x;
 		this.y=y;
 	}
+	
+	
 
 }

@@ -29,5 +29,11 @@ public abstract class Ghost extends Character {
 		return this.LastMoveInverse;
 	}
 
+	public void changeDirection(int c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

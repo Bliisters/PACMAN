@@ -158,7 +158,7 @@ public class Mapi {
 		int y = this.pacman.getPosy();
 		if (possiblemove(x,y-1)) {
 			move(x,y,x,y-1);
-			pacman.changeDirection(3);
+			pacman.changeDirection(0);
 		}
 	}
 	
@@ -167,7 +167,7 @@ public class Mapi {
 		int y = this.pacman.getPosy();
 		if (possiblemove(x,y+1)) {
 			move(x,y,x,y+1);
-			pacman.changeDirection(2);
+			pacman.changeDirection(1);
 		}
 	}
 	public void moveUP() {
@@ -175,7 +175,7 @@ public class Mapi {
 		int y = this.pacman.getPosy();
 		if (possiblemove(x-1,y)) {
 			move(x,y,x-1,y);
-			pacman.changeDirection(0);
+			pacman.changeDirection(2);
 		}
 	}
 		public void moveDOWN() {
@@ -183,7 +183,7 @@ public class Mapi {
 			int y = this.pacman.getPosy();
 			if (possiblemove(x+1,y)) {
 				move(x,y,x+1,y);
-				pacman.changeDirection(1);
+				pacman.changeDirection(3);
 			}
 
 		}
@@ -261,6 +261,7 @@ public class Mapi {
 				else if(C==3) {x1=x+1; y1=y;}
 				
 			}
+			F.changeDirection(C);
 			this.map[x1][y1][1]=F;
 			F.setLastMove(C);
 			F.setPos(x1, y1);

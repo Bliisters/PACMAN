@@ -8,4 +8,7 @@ public class Inky extends Ghost {
 		super(x,y,im);
 	}
 
+	public void changeDirection(int i){
+		this.sprite=data.getSpriteInky(i);
+	}
 }

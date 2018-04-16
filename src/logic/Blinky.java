@@ -9,4 +9,7 @@ public class Blinky extends Ghost {
 		}
 		
 		
+		public void changeDirection(int i){
+			this.sprite=data.getSpriteBlinky(i);
+		}
 }
