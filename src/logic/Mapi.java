@@ -95,8 +95,8 @@ public class Mapi {
 		moveGhost(this.Inky);
 		moveGhost(this.Pinky);
 		moveGhost(this.Clyde);
-		movePACMAN(key);
-		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {	//retour au départ si Pacman touche un fantome
+		boolean choc=movePACMAN(key);
+		if(choc) {	//retour au départ si Pacman touche un fantome
 			
 			this.vie=this.vie-1;
 			
@@ -138,7 +138,9 @@ public class Mapi {
 		}
 		return im;
 	}
-	private void movePACMAN(String k) {
+	private boolean movePACMAN(String k) {
+		boolean choc=false;
+		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {choc=true;}
 		if(k.equals("UP")) {
 			moveUP();
 		}
@@ -151,7 +153,8 @@ public class Mapi {
 		if(k.equals("RIGHT")) {
 			moveRIGHT();
 		}
-		
+		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {choc=true;}
+		return choc;
 	}
 	public void moveLEFT() {
 		int x = this.pacman.getPosx();
