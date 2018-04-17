@@ -362,5 +362,4 @@ public class Mapi {
 		public boolean checkMort(){
 			return this.mort;
 		}
-
 }
