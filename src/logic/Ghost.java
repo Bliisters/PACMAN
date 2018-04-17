@@ -5,10 +5,12 @@ import javax.swing.ImageIcon;
 public abstract class Ghost extends Character {
 
 	private int LastMoveInverse;	// Entier correspondant au sens inverse de l'actuel déplacement du ghost
+	private boolean Mangeable;
 	
 	public Ghost(int x, int y, ImageIcon im) {
 		super(x,y,im);
 		LastMoveInverse=5;
+		Mangeable=false;
 	}
 	
 	public void setLastMove(int L) {
@@ -33,6 +35,13 @@ public abstract class Ghost extends Character {
 		// TODO Auto-generated method stub
 		
 	}
+	public void setMangeable(boolean M) {
+		this.Mangeable=M;
+	}
+	public boolean getMangeable() {
+		return this.Mangeable;
+	}
+	
 
 
 

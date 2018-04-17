@@ -9,6 +9,7 @@ public class Clyde extends Ghost {
 	}
 	
 	public void changeDirection(int i){
+		
 		this.sprite=data.getSpriteClyde(i);
 	}
 
