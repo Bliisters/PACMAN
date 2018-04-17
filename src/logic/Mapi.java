@@ -30,6 +30,7 @@ public class Mapi {
 	boolean mort;
 	
 	public Mapi(int level) {
+		
 		this.mort=false;
 		this.level=level;
 		mapWidth = data.getMapiWidth(this.level);
