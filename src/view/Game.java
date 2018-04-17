@@ -26,6 +26,7 @@ public class Game extends JFrame{
 	JPanel panPrincipal;
 	JPanel panGame;
 	JPanel panWin;
+	JPanel panLose;
 	Panneau panStats;
 
 	JLabel logo;
@@ -136,11 +137,15 @@ public class Game extends JFrame{
 		panWin=new JPanel();
 		panWin.setBackground(Color.black);
 		panWin.setSize(nbPixelSprite*nbCasesWidth,nbPixelSprite*nbCasesHeight);
+		panLose=new JPanel();
+		panLose.setBackground(Color.black);
+		panLose.setSize(nbPixelSprite*nbCasesWidth,nbPixelSprite*nbCasesHeight);
 		
 		container = new JPanel();
 		container.setLayout(cl);
 		container.add(panGame,"GAME");
 		container.add(panWin,"WIN");
+		container.add(panLose,"LOSE");
 		cl.first(container);
 		
 		panPrincipal.add(logo);
@@ -157,15 +162,18 @@ public class Game extends JFrame{
 		score.setFont(font);
 		
 		panWin.setLayout(null);
-		int taille=200;
+		int taille=300;
 		JLabel Win = new JLabel(l.getSpriteMenu(100));
 		panWin.add(Win);
-		Win.setBounds((panGame.getWidth()/2-taille/2),(panGame.getHeight()/2-taille/2),taille,taille);
-		/*scoreWin = new JLabel("Score Final : "+l.getScore());
-		scoreWin.setSize(taille,taille/4);
-		panWin.add(scoreWin);
-		scoreWin.setBounds(0,0,scoreWin.getWidth(),scoreWin.getHeight());
-		scoreWin.setFont(font);*/
+		Win.setSize(300,300);
+		Win.setBounds((panGame.getWidth()/2-taille/2),(panGame.getHeight()/2-taille/2),Win.getWidth(),Win.getHeight());
+		
+		panLose.setLayout(null);
+		taille=300;
+		JLabel Lose = new JLabel(l.getSpriteMenu(101));
+		panLose.add(Lose);
+		Lose.setSize(300,300);
+		Lose.setBounds((panGame.getWidth()/2-taille/2),(panGame.getHeight()/2-taille/2),Lose.getWidth(),Lose.getHeight());
 		
 		panPrincipal.add(container);
 		container.setBounds(espacement,2*espacement+logo.getHeight(),panGame.getWidth(),panGame.getHeight());
@@ -218,13 +226,14 @@ public class Game extends JFrame{
 		this.key_right=false;
 		this.key_left=false;
 		
+		this.checkFinish();
+		this.checkGameOver();
+		
 		panGame.removeAll();
 		Tab=l.getTableau("UP");
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
-		
-		this.checkFinish();
 	}
 	
 	public void moveDown() throws InterruptedException{
@@ -234,13 +243,14 @@ public class Game extends JFrame{
 		this.key_right=false;
 		this.key_left=false;
 		
+		this.checkFinish();
+		this.checkGameOver();
+		
 		panGame.removeAll();
 		Tab=l.getTableau("DOWN");
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
-		
-		this.checkFinish();
 	}
 	
 	public void moveLeft() throws InterruptedException{
@@ -250,13 +260,14 @@ public class Game extends JFrame{
 		this.key_right=false;
 		this.key_left=true;
 		
+		this.checkFinish();
+		this.checkGameOver();
+		
 		panGame.removeAll();
 		Tab=l.getTableau("LEFT");
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
-		
-		this.checkFinish();
 	}
 	
 	public void moveRight() throws InterruptedException{
@@ -266,13 +277,15 @@ public class Game extends JFrame{
 		this.key_right=true;
 		this.key_left=false;
 		
+		this.checkFinish();
+		this.checkGameOver();
+		
 		panGame.removeAll();
 		Tab=l.getTableau("RIGHT");
 		this.reset();
 		this.refresh();
 		this.getContentPane().repaint();
 		
-		this.checkFinish();
 	}
 	
 	public void refresh(){
@@ -310,18 +323,13 @@ public class Game extends JFrame{
 		score.setBounds(espacement,espacement,score.getWidth(),score.getHeight());
 		score.setFont(font);
 		
-		/*int taille=200;
-		panWin.remove(scoreWin);
-		scoreWin = new JLabel("Score Final : "+l.getScore());
-		scoreWin.setSize(taille,taille/4);
-		panWin.add(scoreWin);
-		scoreWin.setBounds(0,0,scoreWin.getWidth(),scoreWin.getHeight());
-		scoreWin.setFont(font);*/
 	}
 	
 	public void refreshLife(){
 		nbLife=l.getNbLife();
-		panStats.remove(Life[nbLife-1]);		
+		if(nbLife>0){
+			panStats.remove(Life[nbLife-1]);
+		}	
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -343,6 +351,15 @@ public class Game extends JFrame{
 	public void checkFinish(){
 		if(l.checkFinish()){
 			cl.show(container, "WIN");
+			this.son.stop();
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void checkGameOver(){
+		if(l.getNbLife()==0){
+			System.out.println("test");
+			cl.show(container, "LOSE");
 			this.son.stop();
 		}
 	}

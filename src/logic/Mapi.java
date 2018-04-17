@@ -291,8 +291,7 @@ public class Mapi {
 		}
 		
 		public int getNbLife(){
-			if(this.vie<1){return 1;}
-			else{return this.vie;}
+			return this.vie;
 		}
 		public boolean checkFinish(){
 			if(this.nbgommes>0){return false;}
