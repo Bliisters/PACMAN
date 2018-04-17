@@ -15,7 +15,7 @@ public class Gestion extends Thread {
 		while(game.checkWin()==false){
 			
 			try {
-				Thread.sleep(250);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
