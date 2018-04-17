@@ -113,36 +113,36 @@ public class Mapi {
 			boolean choc3 = moveGhost(this.Pinky);
 			boolean choc4 = moveGhost(this.Clyde);
 		
-		
-		if(choc1 || choc2 || choc3 ||choc4) {	//retour au départ si Pacman touche un fantome
-			
-			this.vie=this.vie-1;
-			
-			//PAC-MAN : 
-			this.map[this.pacman.getPosx()][this.pacman.getPosy()][0]=background;
-			this.map[this.pacman.getPosIniX()][this.pacman.getPosIniY()][0]=this.pacman;
-			this.pacman.setPos(this.pacman.getPosIniX(), this.pacman.getPosIniY());
-			
-			//Blinky
-			this.map[this.Blinky.getPosx()][this.Blinky.getPosy()][1]=null;
-			this.map[this.Blinky.getPosIniX()][this.Blinky.getPosIniY()][1]=this.Blinky;
-			this.Blinky.setPos(this.Blinky.getPosIniX(), this.Blinky.getPosIniY());
-			
-			//Inky
-			this.map[this.Inky.getPosx()][this.Inky.getPosy()][1]=null;
-			this.map[this.Inky.getPosIniX()][this.Inky.getPosIniY()][1]=this.Inky;
-			this.Inky.setPos(this.Inky.getPosIniX(), this.Inky.getPosIniY());
-			
-			//Pinky
-			this.map[this.Pinky.getPosx()][this.Pinky.getPosy()][1]=null;
-			this.map[this.Pinky.getPosIniX()][this.Pinky.getPosIniY()][1]=this.Pinky;
-			this.Pinky.setPos(this.Pinky.getPosIniX(), this.Pinky.getPosIniY());
-			
-			//Clyde
-			this.map[this.Clyde.getPosx()][this.Clyde.getPosy()][1]=null;
-			this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
-			this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
-		}
+			this.mort=(choc1 || choc2 || choc3 ||choc4);
+			if(this.mort) {	//retour au départ si Pacman touche un fantome
+				
+				this.vie=this.vie-1;
+				
+				//PAC-MAN : 
+				this.map[this.pacman.getPosx()][this.pacman.getPosy()][0]=background;
+				this.map[this.pacman.getPosIniX()][this.pacman.getPosIniY()][0]=this.pacman;
+				this.pacman.setPos(this.pacman.getPosIniX(), this.pacman.getPosIniY());
+				
+				//Blinky
+				this.map[this.Blinky.getPosx()][this.Blinky.getPosy()][1]=null;
+				this.map[this.Blinky.getPosIniX()][this.Blinky.getPosIniY()][1]=this.Blinky;
+				this.Blinky.setPos(this.Blinky.getPosIniX(), this.Blinky.getPosIniY());
+				
+				//Inky
+				this.map[this.Inky.getPosx()][this.Inky.getPosy()][1]=null;
+				this.map[this.Inky.getPosIniX()][this.Inky.getPosIniY()][1]=this.Inky;
+				this.Inky.setPos(this.Inky.getPosIniX(), this.Inky.getPosIniY());
+				
+				//Pinky
+				this.map[this.Pinky.getPosx()][this.Pinky.getPosy()][1]=null;
+				this.map[this.Pinky.getPosIniX()][this.Pinky.getPosIniY()][1]=this.Pinky;
+				this.Pinky.setPos(this.Pinky.getPosIniX(), this.Pinky.getPosIniY());
+				
+				//Clyde
+				this.map[this.Clyde.getPosx()][this.Clyde.getPosy()][1]=null;
+				this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
+				this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
+			}
 		}
 		for(int i=0;i<mapHeight;i++) {
 			for(int j=0 ;j<mapWidth;j++) {
