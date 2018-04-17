@@ -50,6 +50,28 @@ public class Listener extends Thread implements KeyListener  {
 		  		game.newLevel();
 	  		}
 	  	}
+	  	
+	  	if((arg0.getKeyCode()==KeyEvent.VK_R)){
+	  		if(game.checkGameOver()){
+	  			g.stop();
+		  		game.restartLevel();
+	  		}
+	  	}
+	  	
+	  	if((arg0.getKeyCode()==KeyEvent.VK_ESCAPE)){
+	  		if(game.checkWin()||game.checkGameOver()){
+	  			g.stop();
+		  		game.dispose();
+	  		}
+	  	}
+	  	
+	  	if((arg0.getKeyCode()==KeyEvent.VK_M)){
+	  		if(game.checkWin()||game.checkGameOver()){
+	  			g.stop();
+		  		game.dispose();
+		  		new Accueil();
+	  		}
+	  	}
 	}
 
 

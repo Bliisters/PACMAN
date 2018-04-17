@@ -226,13 +226,13 @@ public class Game extends JFrame{
 		this.key_right=false;
 		this.key_left=false;
 		
-		this.checkFinish();
-		this.checkGameOver();
-		
 		panGame.removeAll();
 		Tab=l.getTableau("UP");
 		this.reset();
 		this.refresh();
+		this.checkFinish();
+		this.checkLife();
+		
 		this.getContentPane().repaint();
 	}
 	
@@ -243,13 +243,13 @@ public class Game extends JFrame{
 		this.key_right=false;
 		this.key_left=false;
 		
-		this.checkFinish();
-		this.checkGameOver();
-		
 		panGame.removeAll();
 		Tab=l.getTableau("DOWN");
 		this.reset();
 		this.refresh();
+		this.checkFinish();
+		this.checkLife();
+		
 		this.getContentPane().repaint();
 	}
 	
@@ -260,13 +260,13 @@ public class Game extends JFrame{
 		this.key_right=false;
 		this.key_left=true;
 		
-		this.checkFinish();
-		this.checkGameOver();
-		
 		panGame.removeAll();
 		Tab=l.getTableau("LEFT");
 		this.reset();
 		this.refresh();
+		this.checkFinish();
+		this.checkLife();
+		
 		this.getContentPane().repaint();
 	}
 	
@@ -276,16 +276,15 @@ public class Game extends JFrame{
 		this.key_down=false;
 		this.key_right=true;
 		this.key_left=false;
-		
-		this.checkFinish();
-		this.checkGameOver();
-		
+
 		panGame.removeAll();
 		Tab=l.getTableau("RIGHT");
 		this.reset();
 		this.refresh();
-		this.getContentPane().repaint();
+		this.checkFinish();
+		this.checkLife();
 		
+		this.getContentPane().repaint();
 	}
 	
 	public void refresh(){
@@ -338,6 +337,14 @@ public class Game extends JFrame{
 		this.dispose();
 		new Game(level+1);
 	}
+
+	@SuppressWarnings("deprecation")
+	public void restartLevel(){
+		listener.stop();
+		this.dispose();
+		new Game(level);
+	}
+	
 	
 	public boolean checkWin(){
 		return l.checkFinish();
@@ -356,11 +363,19 @@ public class Game extends JFrame{
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void checkGameOver(){
-		if(l.getNbLife()==0){
-			System.out.println("test");
+	public void checkLife(){
+		if(l.getNbLife()<=0){
 			cl.show(container, "LOSE");
 			this.son.stop();
+		}
+	}
+	
+	public boolean checkGameOver(){
+		if(l.getNbLife()<=0){
+			return true;
+		}
+		else{
+			return false;
 		}
 	}
 
