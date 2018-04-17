@@ -161,11 +161,11 @@ public class Game extends JFrame{
 		JLabel Win = new JLabel(l.getSpriteMenu(100));
 		panWin.add(Win);
 		Win.setBounds((panGame.getWidth()/2-taille/2),(panGame.getHeight()/2-taille/2),taille,taille);
-		scoreWin = new JLabel("Score Final : "+l.getScore());
+		/*scoreWin = new JLabel("Score Final : "+l.getScore());
 		scoreWin.setSize(taille,taille/4);
 		panWin.add(scoreWin);
 		scoreWin.setBounds(0,0,scoreWin.getWidth(),scoreWin.getHeight());
-		scoreWin.setFont(font);
+		scoreWin.setFont(font);*/
 		
 		panPrincipal.add(container);
 		container.setBounds(espacement,2*espacement+logo.getHeight(),panGame.getWidth(),panGame.getHeight());
@@ -310,13 +310,13 @@ public class Game extends JFrame{
 		score.setBounds(espacement,espacement,score.getWidth(),score.getHeight());
 		score.setFont(font);
 		
-		int taille=200;
+		/*int taille=200;
 		panWin.remove(scoreWin);
 		scoreWin = new JLabel("Score Final : "+l.getScore());
 		scoreWin.setSize(taille,taille/4);
 		panWin.add(scoreWin);
 		scoreWin.setBounds(0,0,scoreWin.getWidth(),scoreWin.getHeight());
-		scoreWin.setFont(font);
+		scoreWin.setFont(font);*/
 	}
 	
 	public void refreshLife(){
