@@ -13,6 +13,7 @@ public class Mapi {
 	int mapWidth;
 	int mapHeight;
 	
+	private int nbgommes=0;
 	private Element[][][] map;
 	private Pacman pacman;
 	private Blinky Blinky;
@@ -53,10 +54,12 @@ public class Mapi {
 				else if(ini[i][j]==2) {
 					/**gomme**/
 					map[i][j][0]=gomme;
+					this.nbgommes=this.nbgommes+1;
 				}
 				else if(ini[i][j]==3) {
 					/**supergomme**/
 					map[i][j][0]=supergomme;
+					this.nbgommes=this.nbgommes+1;
 				}
 				else if(ini[i][j]==4) {
 					/**fruit**/
@@ -98,18 +101,20 @@ public class Mapi {
 	}
 	
 	public ImageIcon[][] getTableau(String key){
+		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
 		if(key.equals("INIT")){}
 		else{
-			moveGhost(this.Blinky);
-			moveGhost(this.Inky);
-			moveGhost(this.Pinky);
-			moveGhost(this.Clyde);
-		}
+			boolean v=movePACMAN(key);
+			if(!v) {
+				movePACMAN(this.pacman.getLastMove());
+			}
+			boolean choc1 = moveGhost(this.Blinky);
+			boolean choc2 = moveGhost(this.Inky);
+			boolean choc3 = moveGhost(this.Pinky);
+			boolean choc4 = moveGhost(this.Clyde);
 		
-		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
-		boolean choc=movePACMAN(key);
-		this.mort=choc;
-		if(choc) {	//retour au départ si Pacman touche un fantome
+		
+		if(choc1 || choc2 || choc3 ||choc4) {	//retour au départ si Pacman touche un fantome
 			
 			this.vie=this.vie-1;
 			
@@ -138,6 +143,7 @@ public class Mapi {
 			this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
 			this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
 		}
+		}
 		for(int i=0;i<mapHeight;i++) {
 			for(int j=0 ;j<mapWidth;j++) {
 				if(map[i][j][1]==null) {
@@ -155,55 +161,45 @@ public class Mapi {
 	private boolean movePACMAN(String k) {
 		boolean choc=false;
 		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {choc=true;}
+		int x = this.pacman.getPosx();
+		int y = this.pacman.getPosy();
+		boolean verif=false;
 		if(k.equals("UP")) {
-			moveUP();
+			if (possiblemove(x-1,y)) {
+				move(x,y,x-1,y);
+				pacman.changeDirection(2);
+				this.pacman.setLastMove("UP");
+				verif=true;
+			}
 		}
 		if(k.equals("DOWN")) {
-			moveDOWN();
-		}
-		if(k.equals("LEFT")) {
-			moveLEFT();
-		}
-		if(k.equals("RIGHT")) {
-			moveRIGHT();
-		}
-		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {choc=true;}
-		return choc;
-	}
-	public void moveLEFT() {
-		int x = this.pacman.getPosx();
-		int y = this.pacman.getPosy();
-		if (possiblemove(x,y-1)) {
-			move(x,y,x,y-1);
-			pacman.changeDirection(0);
-		}
-	}
-	
-	public void moveRIGHT() {
-		int x = this.pacman.getPosx();
-		int y = this.pacman.getPosy();
-		if (possiblemove(x,y+1)) {
-			move(x,y,x,y+1);
-			pacman.changeDirection(1);
-		}
-	}
-	public void moveUP() {
-		int x = this.pacman.getPosx();
-		int y = this.pacman.getPosy();
-		if (possiblemove(x-1,y)) {
-			move(x,y,x-1,y);
-			pacman.changeDirection(2);
-		}
-	}
-		public void moveDOWN() {
-			int x = this.pacman.getPosx();
-			int y = this.pacman.getPosy();
 			if (possiblemove(x+1,y)) {
 				move(x,y,x+1,y);
 				pacman.changeDirection(3);
+				this.pacman.setLastMove("DOWN");
+				verif=true;
 			}
-
 		}
+		if(k.equals("LEFT")) {
+			if (possiblemove(x,y-1)) {
+				move(x,y,x,y-1);
+				pacman.changeDirection(0);
+				this.pacman.setLastMove("LEFT");
+				verif=true;
+			}
+		}
+		if(k.equals("RIGHT")) {
+			if (possiblemove(x,y+1)) {
+				move(x,y,x,y+1);
+				pacman.changeDirection(1);
+				this.pacman.setLastMove("RIGHT");
+				verif=true;
+			}
+		}
+		
+		return verif;
+	}
+
 		
 		private boolean possiblemove(int x,int y) {
 			if (this.map[x][y][0].equals(this.bloc)) {
@@ -225,12 +221,14 @@ public class Mapi {
 				this.pacman.setPos(dx, dy);
 				this.map[x][y][0]=background;
 				this.score=this.score+10;
+				this.nbgommes=this.nbgommes-1;
 			}
 			if(this.map[dx][dy][0].equals(supergomme)) {
 				this.map[dx][dy][0]=pacman;
 				this.pacman.setPos(dx, dy);
 				this.map[x][y][0]=background;
 				this.score=this.score+50;
+				this.nbgommes=this.nbgommes-1;
 			}
 			if(this.map[dx][dy][0].equals(fruit)) {
 				this.map[dx][dy][0]=pacman;
@@ -245,13 +243,14 @@ public class Mapi {
 			return this.score;
 		}
 		
-		public void moveGhost(Ghost F) {
+		public boolean moveGhost(Ghost F) {
 			int x = F.getPosx();
 			int y = F.getPosy();
 			int L = F.getLastMove();
 			int x1=0;
 			int y1=0;
 			int C=0;
+			boolean choc=false;
 
 			
 			if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x+1,y)==false) {L=3;}			//Mouvement si impasse
@@ -282,10 +281,13 @@ public class Mapi {
 			this.map[x1][y1][1]=F;
 			F.setLastMove(C);
 			F.setPos(x1, y1);
+			if(this.map[x][y][0]==this.pacman || this.map[x1][y1][0]==this.pacman) {
+				choc=true;
+			}
 			if(this.map[x][y][1]==F) {
 				this.map[x][y][1]=null;
 			}
-						
+			return choc;			
 		}
 		
 		public int getNbLife(){
@@ -293,15 +295,7 @@ public class Mapi {
 			else{return this.vie;}
 		}
 		public boolean checkFinish(){
-			int cpt=0;
-			for(int i=0;i<mapHeight;i++) {
-				for(int j=0;j<mapWidth;j++){
-					if(map[i][j][0].equals(gomme) || map[i][j][0].equals(supergomme)){
-						cpt++;
-					}
-				}
-			}
-			if(cpt>0){return false;}
+			if(this.nbgommes>0){return false;}
 			else{return true;}
 		}
 		
