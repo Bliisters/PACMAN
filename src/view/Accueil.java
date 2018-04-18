@@ -59,6 +59,7 @@ public class Accueil extends JFrame implements ActionListener {
 	JLabel logoAnime_2;
 	JLabel logoAnime_PACMAN;
 	JLabel pseudoLabel;
+	JLabel levelLabel;
 
 	Dimension dimFenetre = new Dimension(1280,720);
 
@@ -143,6 +144,8 @@ public class Accueil extends JFrame implements ActionListener {
 		//Création des JLabels pour les textes fixes.
 		pseudoLabel= new JLabel("Entrez votre pseudo :");
 		pseudoLabel.setForeground(Color.BLACK);
+		levelLabel= new JLabel("Sélection du level :");
+		levelLabel.setForeground(Color.BLACK);
 		labelScore1= new JLabel("1. : TIBO");
 		labelScore1.setForeground(Color.WHITE);
 		
@@ -164,8 +167,10 @@ public class Accueil extends JFrame implements ActionListener {
 		int longueurLabel=150;
 		int hauteur=25;
 		int longueurTextField=250;
+		int longueurChoiceLevel=50;
+		int espacementH = 20;
 		panJouer.add(fondPseudo);
-		fondPseudo.setBounds(this.getWidth()/2-((longueurTextField+longueurLabel+10)/2), 450, longueurTextField+longueurLabel+10, hauteur+10);
+		fondPseudo.setBounds(this.getWidth()/2-((longueurTextField+longueurLabel+10)/2), 450, longueurTextField+longueurLabel+10, 2*hauteur+10+espacementH);
 		fondPseudo.setLayout(null);
 		fondPseudo.add(pseudoLabel);
 		pseudoLabel.setBounds(5, 5, longueurLabel, hauteur);
@@ -175,9 +180,12 @@ public class Accueil extends JFrame implements ActionListener {
 		boutValidation.setBounds(640, 625, boutValidation.getLongueur(), boutValidation.getHauteur());
 		panJouer.add(boutAnnuler);
 		boutAnnuler.setBounds(140, 625, boutAnnuler.getLongueur(), boutAnnuler.getHauteur());
-		panJouer.add(choiceLevel);
-		choiceLevel.setSize(50,20);
-		choiceLevel.setBounds((panPrincipal.getWidth()/2)-(choiceLevel.getWidth()/2),fondPseudo.getBounds().y+fondPseudo.getHeight()+20,choiceLevel.getWidth(),choiceLevel.getHeight());
+		fondPseudo.add(choiceLevel);
+		choiceLevel.setSize(longueurChoiceLevel,hauteur);
+		choiceLevel.setBounds(fondPseudo.getWidth()-5-longueurChoiceLevel,5+espacementH+pseudoLabel.getHeight(),choiceLevel.getWidth(),choiceLevel.getHeight());
+		fondPseudo.add(levelLabel);
+		levelLabel.setSize(longueurLabel,hauteur);
+		levelLabel.setBounds(5, 5+espacementH+pseudoLabel.getHeight(),levelLabel.getWidth() , levelLabel.getHeight());
 		
 		//Parametrage du panneau panScore.
 		panScore.setLayout(null);
@@ -233,7 +241,7 @@ public class Accueil extends JFrame implements ActionListener {
 			cl.show(container, boutScore.getStr());
 		}
 
-		//Affichage du Panneau Acceuil.
+		//Affichage du Panneau Accueil.
 		if ((arg0.getSource() == (boutRetour)) || (arg0.getSource() == (boutAnnuler) )){
 			
 			panPrincipal.add(logo);
