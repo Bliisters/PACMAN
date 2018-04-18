@@ -330,8 +330,11 @@ public class Mapi {
 				else if(C==3) {x1=x+1; y1=y;}
 				
 			}
-			if(F.getMangeable()==true) {
+			if(F.getMangeable()==true && this.cmptMange<7) {
 				F.changeDirection(9);
+			}
+			else if(F.getMangeable()==true && this.cmptMange>=7){
+				F.changeDirection(8);
 			}
 			else { F.changeDirection(C); }
 			
@@ -348,8 +351,7 @@ public class Mapi {
 		}
 		
 		public int getNbLife(){
-			if(this.vie<1){return 1;}
-			else{return this.vie;}
+			return this.vie;
 		}
 		public boolean checkFinish(){
 			if(this.nbgommes>0){return false;}
@@ -359,5 +361,4 @@ public class Mapi {
 		public boolean checkMort(){
 			return this.mort;
 		}
-
 }
