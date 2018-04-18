@@ -287,6 +287,23 @@ public class Game extends JFrame{
 		this.getContentPane().repaint();
 	}
 	
+public void moveInit() throws InterruptedException{
+		
+		this.key_up=false;
+		this.key_down=false;
+		this.key_right=false;
+		this.key_left=false;
+
+		panGame.removeAll();
+		Tab=l.getTableau("INIT");
+		this.reset();
+		this.refresh();
+		this.checkFinish();
+		this.checkLife();
+		
+		this.getContentPane().repaint();
+	}
+	
 	public void refresh(){
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){

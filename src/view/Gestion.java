@@ -45,8 +45,16 @@ public class Gestion extends Thread {
 			
 			if(game.checkMort()){
 		  		list.setKey("INIT");
+		  		key=list.getKey();
 		  	}
 			
+			if(key.equals("INIT")){try {
+				game.moveInit();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}}
+			
+			System.out.println(key);
 			
 		}
 	}
