@@ -105,16 +105,21 @@ public class Mapi {
 	public ImageIcon[][] getTableau(String key){
 		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
 		boolean MangeAll = false;
-		if(key.equals("INIT")){}
+		boolean choc1=false;
+		boolean choc2=false;
+		boolean choc3=false;
+		boolean choc4=false;
+		System.out.println(key);
+		if(key.equals("INIT")){System.out.println(this.mort);}
 		else{
 			boolean v=movePACMAN(key);
 			if(!v) {
 				movePACMAN(this.pacman.getLastMove());
 			}
-			boolean choc1 = moveGhost(this.Blinky);
-			boolean choc2 = moveGhost(this.Inky);
-			boolean choc3 = moveGhost(this.Pinky);
-			boolean choc4 = moveGhost(this.Clyde);
+			choc1 = moveGhost(this.Blinky);
+			choc2 = moveGhost(this.Inky);
+			choc3 = moveGhost(this.Pinky);
+			choc4 = moveGhost(this.Clyde);
 			
 			if(this.cmptMange<10) {
 				this.cmptMange=this.cmptMange+1;
@@ -125,12 +130,13 @@ public class Mapi {
 				this.Pinky.setMangeable(false);
 				this.Clyde.setMangeable(false);
 			}
-		
-			if(choc1 || choc2 || choc3 ||choc4) {	//retour au départ si Pacman touche un fantome
-				if((choc1 && this.Blinky.getMangeable()==false) || (choc2 && this.Inky.getMangeable()==false) || (choc3 && this.Pinky.getMangeable()==false) || (choc4 && this.Clyde.getMangeable()==false)) {
+		}
+			if(choc1 || choc2 || choc3 ||choc4 || this.mort==true || key.equals("INIT")) {	//retour au départ si Pacman touche un fantome
+				if(((choc1 && this.Blinky.getMangeable()==false) || (choc2 && this.Inky.getMangeable()==false) || (choc3 && this.Pinky.getMangeable()==false) || (choc4 && this.Clyde.getMangeable()==false))&& this.mort==false) {
 					this.vie=this.vie-1;
 					MangeAll = true;
 				}
+				else if(this.mort==true) {}
 				else {
 					if(choc1) {
 						this.cmptGhosts=this.cmptGhosts+1;
@@ -152,14 +158,14 @@ public class Mapi {
 					
 				}
 				//PAC-MAN : 
-				if(MangeAll) {
+				if(this.mort) {
 					this.map[this.pacman.getPosx()][this.pacman.getPosy()][0]=background;
 					this.map[this.pacman.getPosIniX()][this.pacman.getPosIniY()][0]=this.pacman;
 					this.pacman.setPos(this.pacman.getPosIniX(), this.pacman.getPosIniY());
 				}
 				
 				//Blinky
-				if(MangeAll || choc1) {
+				if(this.mort || choc1) {
 					this.map[this.Blinky.getPosx()][this.Blinky.getPosy()][1]=null;
 					this.map[this.Blinky.getPosIniX()][this.Blinky.getPosIniY()][1]=this.Blinky;
 					this.Blinky.setPos(this.Blinky.getPosIniX(), this.Blinky.getPosIniY());
@@ -168,40 +174,57 @@ public class Mapi {
 				
 				
 				//Inky
-				if(MangeAll || choc2) {
+				if(this.mort || choc2) {
 					this.map[this.Inky.getPosx()][this.Inky.getPosy()][1]=null;
 					this.map[this.Inky.getPosIniX()][this.Inky.getPosIniY()][1]=this.Inky;
 					this.Inky.setPos(this.Inky.getPosIniX(), this.Inky.getPosIniY());
 					this.Inky.changeDirection(0);
 				}
 				//Pinky
-				if(MangeAll || choc3) {
+				if(this.mort || choc3) {
 					this.map[this.Pinky.getPosx()][this.Pinky.getPosy()][1]=null;
 					this.map[this.Pinky.getPosIniX()][this.Pinky.getPosIniY()][1]=this.Pinky;
 					this.Pinky.setPos(this.Pinky.getPosIniX(), this.Pinky.getPosIniY());
 					this.Pinky.changeDirection(0);
 				}
 				//Clyde
-				if(MangeAll || choc4) {
+				if(this.mort || choc4 ) {
 					this.map[this.Clyde.getPosx()][this.Clyde.getPosy()][1]=null;
 					this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
 					this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
 					this.Clyde.changeDirection(0);
 				}
+				this.mort=false;
 			}
-		}
+		
 		this.mort=MangeAll;
-		for(int i=0;i<mapHeight;i++) {
-			for(int j=0 ;j<mapWidth;j++) {
-				if(map[i][j][1]==null) {
-					//System.out.println(i+"    "+j);
-					im[i][j]=map[i][j][0].getSprite();
-				}
-				else {
-					im[i][j]=map[i][j][1].getSprite();
+		if(this.mort) {
+			for(int i=0;i<mapHeight;i++) {
+				for(int j=0 ;j<mapWidth;j++) {
+					if(map[i][j][0]==this.pacman) {
+						//System.out.println(i+"    "+j);
+						im[i][j]=data.getSpriteBlinky(5);
+					}
+					else {
+						im[i][j]=map[i][j][0].getSprite();
+					}
 				}
 			}
 		}
+		else {
+			for(int i=0;i<mapHeight;i++) {
+				for(int j=0 ;j<mapWidth;j++) {
+					if(map[i][j][1]==null) {
+						//System.out.println(i+"    "+j);
+						im[i][j]=map[i][j][0].getSprite();
+					}
+					else {
+						im[i][j]=map[i][j][1].getSprite();
+					}
+				}
+			}
+		}
+		System.out.println(this.mort);
 		return im;
 	}
 	
