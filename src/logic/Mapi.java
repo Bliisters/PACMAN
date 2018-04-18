@@ -104,6 +104,7 @@ public class Mapi {
 	
 	public ImageIcon[][] getTableau(String key){
 		ImageIcon[][] im= new ImageIcon[mapHeight][mapWidth];  
+		boolean MangeAll = false;
 		if(key.equals("INIT")){}
 		else{
 			boolean v=movePACMAN(key);
@@ -115,8 +116,6 @@ public class Mapi {
 			boolean choc3 = moveGhost(this.Pinky);
 			boolean choc4 = moveGhost(this.Clyde);
 			
-			boolean MangeAll = false;
-			
 			if(this.cmptMange<10) {
 				this.cmptMange=this.cmptMange+1;
 			}
@@ -127,8 +126,7 @@ public class Mapi {
 				this.Clyde.setMangeable(false);
 			}
 		
-			this.mort=(choc1 || choc2 || choc3 ||choc4);
-			if(this.mort) {	//retour au départ si Pacman touche un fantome
+			if(choc1 || choc2 || choc3 ||choc4) {	//retour au départ si Pacman touche un fantome
 				if((choc1 && this.Blinky.getMangeable()==false) || (choc2 && this.Inky.getMangeable()==false) || (choc3 && this.Pinky.getMangeable()==false) || (choc4 && this.Clyde.getMangeable()==false)) {
 					this.vie=this.vie-1;
 					MangeAll = true;
@@ -192,6 +190,7 @@ public class Mapi {
 				}
 			}
 		}
+		this.mort=MangeAll;
 		for(int i=0;i<mapHeight;i++) {
 			for(int j=0 ;j<mapWidth;j++) {
 				if(map[i][j][1]==null) {
