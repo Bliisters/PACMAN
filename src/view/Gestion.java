@@ -15,7 +15,7 @@ public class Gestion extends Thread {
 		while(game.checkWin()==false){
 			
 			try {
-				Thread.sleep(250);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -48,11 +48,11 @@ public class Gestion extends Thread {
 		  		key=list.getKey();
 		  	}
 			
-			if(key.equals("INIT")){try {
+		/*	if(key.equals("INIT")){try {
 				game.moveInit();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}}
+			}}*/
 			
 			System.out.println(key);
 			
