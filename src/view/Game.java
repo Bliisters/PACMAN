@@ -212,6 +212,7 @@ public class Game extends JFrame{
 		}
 		
 		this.setContentPane(panPrincipal);
+		
 		panGame.setDoubleBuffered(true);
 		
 	}
