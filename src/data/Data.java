@@ -132,6 +132,8 @@ public class Data implements DataGetters{
 			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");
 		  case 0:
 			  return new ImageIcon("images/characters/pacman/pacmanGIFGv2.gif");
+		  case 666:
+			  return new ImageIcon("images/characters/pacman/pacmanGIFMv2.gif");
 		  default:
 			  return new ImageIcon("images/characters/pacman/pacmanGIFDv2.gif");             
 		}

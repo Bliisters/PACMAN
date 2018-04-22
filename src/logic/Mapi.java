@@ -171,7 +171,7 @@ public class Mapi {
 				for(int j=0 ;j<mapWidth;j++) {
 					if(map[i][j][0]==this.pacman) {
 						//System.out.println(i+"    "+j);
-						im[i][j]=data.getSpriteBlinky(5);
+						im[i][j]=data.getSpritePacMan(666);
 					}
 					else {
 						im[i][j]=map[i][j][0].getSprite();
