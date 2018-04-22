@@ -35,8 +35,7 @@ public class Game extends JFrame{
 	
 	Audio son;
 	Listener listener;
-	
-	boolean key_right,key_left,key_down,key_up;
+
 	boolean in_game;
 	
 	int nbCasesHeight;
@@ -111,11 +110,6 @@ public class Game extends JFrame{
 		this.setVisible(true);
 		this.setFocusable(true);
 		this.setIconImage(l.getSpriteMenuImage(0));
-		
-		key_right=false;
-		key_left=false;
-		key_up=false;
-		key_down=false;
 		
 		listener=new Listener(this);
 		this.addKeyListener(listener);
@@ -222,103 +216,43 @@ public class Game extends JFrame{
 	}
 	
 	public void moveUP() throws InterruptedException{
-		
-		this.key_up=true;
-		this.key_down=false;
-		this.key_right=false;
-		this.key_left=false;
-		
-		panGame.removeAll();
+
 		Tab=l.getTableau("UP");
-		this.reset();
 		this.refresh();
-		this.checkFinish();
-		this.checkLife();
-		
-		this.getContentPane().repaint();
+
 	}
 	
 	public void moveDown() throws InterruptedException{
-		
-		this.key_up=false;
-		this.key_down=true;
-		this.key_right=false;
-		this.key_left=false;
-		
-		panGame.removeAll();
+
 		Tab=l.getTableau("DOWN");
-		this.reset();
 		this.refresh();
-		this.checkFinish();
-		this.checkLife();
 		
-		this.getContentPane().repaint();
 	}
 	
 	public void moveLeft() throws InterruptedException{
 		
-		this.key_up=false;
-		this.key_down=false;
-		this.key_right=false;
-		this.key_left=true;
-		
-		panGame.removeAll();
 		Tab=l.getTableau("LEFT");
-		this.reset();
 		this.refresh();
-		this.checkFinish();
-		this.checkLife();
-		
-		this.getContentPane().repaint();
+
 	}
 	
 	public void moveRight() throws InterruptedException{
-		
-		this.key_up=false;
-		this.key_down=false;
-		this.key_right=true;
-		this.key_left=false;
 
-		panGame.removeAll();
 		Tab=l.getTableau("RIGHT");
-		this.reset();
 		this.refresh();
-		this.checkFinish();
-		this.checkLife();
-		
-		this.getContentPane().repaint();
+
 	}
 	
-public void moveInit() throws InterruptedException{
-		
-		this.key_up=false;
-		this.key_down=false;
-		this.key_right=false;
-		this.key_left=false;
+	public void moveInit() throws InterruptedException{
 
-		panGame.removeAll();
 		Tab=l.getTableau("INIT");
-		this.reset();
 		this.refresh();
-		this.checkFinish();
-		this.checkLife();
 		
-		this.getContentPane().repaint();
 	}
 	
 	public void refresh(){
 		
-		for(int i = 0; i <= nbCasesHeight-1; i++){
-			for(int j = 0; j <= nbCasesWidth-1; j++){
-				panGame.add(this.Tableau[i][j]);
-				this.TableauBase[i][j].setBounds(j*nbPixelSprite, i*nbPixelSprite, Tableau[i][j].getWidth(), Tableau[i][j].getHeight());
-			}
-		}
-		this.refreshScore();
-		this.refreshLife();
-	}
-	
-	public void reset(){
+		panGame.removeAll();
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
 			for(int j = 0; j <= nbCasesWidth-1; j++){
@@ -331,6 +265,20 @@ public void moveInit() throws InterruptedException{
 				this.Tableau[i][j]=this.TableauBase[i][j];
 			}
 		}
+		
+		for(int i = 0; i <= nbCasesHeight-1; i++){
+			for(int j = 0; j <= nbCasesWidth-1; j++){
+				panGame.add(this.Tableau[i][j]);
+				this.TableauBase[i][j].setBounds(j*nbPixelSprite, i*nbPixelSprite, Tableau[i][j].getWidth(), Tableau[i][j].getHeight());
+			}
+		}
+		this.refreshScore();
+		this.refreshLife();
+		
+		this.checkFinish();
+		this.checkLife();
+		
+		this.getContentPane().repaint();
 	}
 	
 	public void refreshScore(){

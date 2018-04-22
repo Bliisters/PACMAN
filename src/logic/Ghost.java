@@ -6,11 +6,13 @@ public abstract class Ghost extends Character {
 
 	private int LastMoveInverse;	// Entier correspondant au sens inverse de l'actuel déplacement du ghost
 	private boolean Mangeable;
+	private boolean Estmange;
 	
 	public Ghost(int x, int y, ImageIcon im) {
 		super(x,y,im);
 		LastMoveInverse=5;
 		Mangeable=false;
+		Estmange=false;
 	}
 	
 	public void setLastMove(int L) {
@@ -40,6 +42,13 @@ public abstract class Ghost extends Character {
 	}
 	public boolean getMangeable() {
 		return this.Mangeable;
+	}
+	
+	public void setEstMange(boolean B){
+		this.Estmange=B;
+	}
+	public boolean getEstMange(){
+		return this.Estmange;
 	}
 	
 

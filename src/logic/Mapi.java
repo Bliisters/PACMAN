@@ -141,59 +141,27 @@ public class Mapi {
 					if(choc1) {
 						this.cmptGhosts=this.cmptGhosts+1;
 						this.Blinky.setMangeable(false);
+						this.Blinky.setEstMange(true);
 					}
 					if(choc2) {
 						this.cmptGhosts=this.cmptGhosts+1;
 						this.Inky.setMangeable(false);
+						this.Inky.setEstMange(true);
 					}
 					if(choc3) {
 						this.cmptGhosts=this.cmptGhosts+1;
 						this.Pinky.setMangeable(false);
+						this.Pinky.setEstMange(true);
 					}
 					if(choc4) {
 						this.cmptGhosts=this.cmptGhosts+1;
 						this.Clyde.setMangeable(false);
+						this.Clyde.setEstMange(true);
 					}
-					score=score+(this.cmptGhosts*200);
-					
-				}
-				//PAC-MAN : 
-				if(this.mort) {
-					this.map[this.pacman.getPosx()][this.pacman.getPosy()][0]=background;
-					this.map[this.pacman.getPosIniX()][this.pacman.getPosIniY()][0]=this.pacman;
-					this.pacman.setPos(this.pacman.getPosIniX(), this.pacman.getPosIniY());
+					score=score+(this.cmptGhosts*200);				
 				}
 				
-				//Blinky
-				if(this.mort || choc1) {
-					this.map[this.Blinky.getPosx()][this.Blinky.getPosy()][1]=null;
-					this.map[this.Blinky.getPosIniX()][this.Blinky.getPosIniY()][1]=this.Blinky;
-					this.Blinky.setPos(this.Blinky.getPosIniX(), this.Blinky.getPosIniY());
-					this.Blinky.changeDirection(0);
-				}
-				
-				
-				//Inky
-				if(this.mort || choc2) {
-					this.map[this.Inky.getPosx()][this.Inky.getPosy()][1]=null;
-					this.map[this.Inky.getPosIniX()][this.Inky.getPosIniY()][1]=this.Inky;
-					this.Inky.setPos(this.Inky.getPosIniX(), this.Inky.getPosIniY());
-					this.Inky.changeDirection(0);
-				}
-				//Pinky
-				if(this.mort || choc3) {
-					this.map[this.Pinky.getPosx()][this.Pinky.getPosy()][1]=null;
-					this.map[this.Pinky.getPosIniX()][this.Pinky.getPosIniY()][1]=this.Pinky;
-					this.Pinky.setPos(this.Pinky.getPosIniX(), this.Pinky.getPosIniY());
-					this.Pinky.changeDirection(0);
-				}
-				//Clyde
-				if(this.mort || choc4 ) {
-					this.map[this.Clyde.getPosx()][this.Clyde.getPosy()][1]=null;
-					this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
-					this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
-					this.Clyde.changeDirection(0);
-				}
+				reInit(this.mort);
 				this.mort=false;
 			}
 		
@@ -228,9 +196,9 @@ public class Mapi {
 		return im;
 	}
 	
+	
+	
 	private boolean movePACMAN(String k) {
-		boolean choc=false;
-		if(map[this.pacman.getPosx()][this.pacman.getPosy()][1]!=null) {choc=true;}
 		int x = this.pacman.getPosx();
 		int y = this.pacman.getPosy();
 		boolean verif=false;
@@ -374,15 +342,15 @@ public class Mapi {
 		}
 		
 		
-		public boolean followPM(Ghost F) {
+		public boolean followPM(Ghost F,int dx, int dy) {
 			int x = F.getPosx();
 			int y = F.getPosy();
 			int L = F.getLastMove();
 			int x1=0;
 			int y1=0;
 			int C=0;
-			int pmx = this.pacman.getPosx();
-			int pmy = this.pacman.getPosy();
+			int pmx = dx;
+			int pmy = dy;
 			boolean choc=false;
 
 			
@@ -425,6 +393,16 @@ public class Mapi {
 			else if(F.getMangeable()==true && this.cmptMange>=7){
 				F.changeDirection(8);
 			}
+			else if(F.getEstMange()) {
+				if(F.getPosIniX()==x1 && F.getPosIniY()==y1) {
+					F.setEstMange(false);
+					F.changeDirection(0);
+				}
+				else {
+					F.changeDirection(C+4);
+				}
+				
+			}
 			else { F.changeDirection(C); }
 			
 			this.map[x1][y1][1]=F;
@@ -462,7 +440,7 @@ public class Mapi {
 					(Math.sqrt(Math.pow(pmx-x-1, 2)+Math.pow(pmy-y,2))),
 					(Math.sqrt(Math.pow(pmx-x+1, 2)+Math.pow(pmy-y ,2)))};
 
-			//if (L<5)dist[L] = 99;
+			if (L<5)dist[L] = 99; ////
 			
 			
 			while(possiblemove(x1,y1)==false) {			
@@ -509,18 +487,24 @@ public class Mapi {
 		public boolean moveBlinky(Ghost blinky) {
 			if (blinky.getMangeable() == true)
 				return runAway(blinky);
+			else if(blinky.getEstMange()) {
+				return followPM(blinky,blinky.getPosIniX(),blinky.getPosIniY());
+			}
 			else 
-				return followPM(blinky);
+				return followPM(blinky,this.pacman.getPosx(),this.pacman.getPosy());
 		}
 		
 		
 		public boolean movePinky(Ghost pinky) {
 			if (pinky.getMangeable() == true)
 				return runAway(pinky);
+			else if(pinky.getEstMange()) {
+				return followPM(pinky,pinky.getPosIniX(),pinky.getPosIniY());
+			}
 			else {
 				int alea = (int)(Math.random()*3);
 				if(alea > 0)
-					return followPM(pinky);
+					return followPM(pinky,this.pacman.getPosx(),this.pacman.getPosy());
 				else
 					return moveGhost(pinky);
 			}
@@ -529,6 +513,10 @@ public class Mapi {
 		public boolean moveInky(Ghost inky) {
 			if (inky.getMangeable() == true)
 				return runAway(inky);
+			
+			else if(inky.getEstMange()) {
+				return followPM(inky,inky.getPosIniX(),inky.getPosIniY());
+			}
 			else 
 				return moveGhost(inky);
 		}
@@ -536,15 +524,59 @@ public class Mapi {
 		public boolean moveClyde(Ghost clyde) {
 			if (clyde.getMangeable() == true)
 				return runAway(clyde);
+			
+			else if(clyde.getEstMange()) {
+				return followPM(clyde,clyde.getPosIniX(),clyde.getPosIniY());
+			}
 			else {
 				int alea = (int)(Math.random()*3);
 				if(alea > 0)
-					return followPM(clyde);
+					return followPM(clyde,this.pacman.getPosx(),this.pacman.getPosy());
 				else
 					return runAway(clyde);
 			}
 		}
 		
+		
+		public void reInit(boolean P) {
+			//PAC-MAN : 
+			if(P) {
+				this.map[this.pacman.getPosx()][this.pacman.getPosy()][0]=background;
+				this.map[this.pacman.getPosIniX()][this.pacman.getPosIniY()][0]=this.pacman;
+				this.pacman.setPos(this.pacman.getPosIniX(), this.pacman.getPosIniY());
+			}
+			
+			//Blinky
+			if(P) {
+				this.map[this.Blinky.getPosx()][this.Blinky.getPosy()][1]=null;
+				this.map[this.Blinky.getPosIniX()][this.Blinky.getPosIniY()][1]=this.Blinky;
+				this.Blinky.setPos(this.Blinky.getPosIniX(), this.Blinky.getPosIniY());
+				this.Blinky.changeDirection(0);
+			}
+			
+			
+			//Inky
+			if(P) {
+				this.map[this.Inky.getPosx()][this.Inky.getPosy()][1]=null;
+				this.map[this.Inky.getPosIniX()][this.Inky.getPosIniY()][1]=this.Inky;
+				this.Inky.setPos(this.Inky.getPosIniX(), this.Inky.getPosIniY());
+				this.Inky.changeDirection(0);
+			}
+			//Pinky
+			if(P) {
+				this.map[this.Pinky.getPosx()][this.Pinky.getPosy()][1]=null;
+				this.map[this.Pinky.getPosIniX()][this.Pinky.getPosIniY()][1]=this.Pinky;
+				this.Pinky.setPos(this.Pinky.getPosIniX(), this.Pinky.getPosIniY());
+				this.Pinky.changeDirection(0);
+			}
+			//Clyde
+			if(P) {
+				this.map[this.Clyde.getPosx()][this.Clyde.getPosy()][1]=null;
+				this.map[this.Clyde.getPosIniX()][this.Clyde.getPosIniY()][1]=this.Clyde;
+				this.Clyde.setPos(this.Clyde.getPosIniX(), this.Clyde.getPosIniY());
+				this.Clyde.changeDirection(0);
+			}
+		}
 		
 		public int getNbLife(){
 			return this.vie;
