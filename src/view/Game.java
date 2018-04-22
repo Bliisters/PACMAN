@@ -235,7 +235,7 @@ public class Game extends JFrame{
 		this.checkFinish();
 		this.checkLife();
 		
-		//this.getContentPane().repaint();
+		this.getContentPane().repaint();
 	}
 	
 	public void moveDown() throws InterruptedException{
@@ -252,7 +252,7 @@ public class Game extends JFrame{
 		this.checkFinish();
 		this.checkLife();
 		
-		//this.getContentPane().repaint();
+		this.getContentPane().repaint();
 	}
 	
 	public void moveLeft() throws InterruptedException{
@@ -269,7 +269,7 @@ public class Game extends JFrame{
 		this.checkFinish();
 		this.checkLife();
 		
-		//this.getContentPane().repaint();
+		this.getContentPane().repaint();
 	}
 	
 	public void moveRight() throws InterruptedException{
@@ -286,7 +286,7 @@ public class Game extends JFrame{
 		this.checkFinish();
 		this.checkLife();
 		
-		//this.getContentPane().repaint();
+		this.getContentPane().repaint();
 	}
 	
 public void moveInit() throws InterruptedException{
@@ -303,7 +303,7 @@ public void moveInit() throws InterruptedException{
 		this.checkFinish();
 		this.checkLife();
 		
-		//this.getContentPane().repaint();
+		this.getContentPane().repaint();
 	}
 	
 	public void refresh(){

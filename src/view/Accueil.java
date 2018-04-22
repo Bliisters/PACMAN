@@ -76,7 +76,7 @@ public class Accueil extends JFrame implements ActionListener {
     
 	public Accueil (){
 		
-		for(int i=1; i<=2; i++){
+		for(int i=1; i<=3; i++){
 			choiceLevel.addItem(i);
 		}
 		
