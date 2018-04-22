@@ -45,12 +45,8 @@ public class Game extends JFrame{
 	int nbLife;
 	int nbLifeMax;
 	
-	int x = 7;
-	int y = 7;
-	int dist=1;
 	
 	JLabel[][] Tableau;
-	JLabel[][] TableauBase;
 	ImageIcon[][] Tab;
 	
 	JLabel[] Life;
@@ -61,8 +57,11 @@ public class Game extends JFrame{
 	
 	public String currentKey="";
 	
+	String pseudo;	
 	
-	public Game(int level){
+	public Game(int level, String pseudo){
+		
+		this.pseudo=pseudo;
 		
 		this.level=level;
 		
@@ -85,7 +84,6 @@ public class Game extends JFrame{
 		nbLifeMax=l.getNbLifeMax(level);
 		espacement=10;
 		
-		this.TableauBase=new JLabel[nbCasesHeight][nbCasesWidth];
 		this.Tableau=new JLabel[nbCasesHeight][nbCasesWidth];
 		this.Life= new JLabel[nbLifeMax];
 		
@@ -175,23 +173,15 @@ public class Game extends JFrame{
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
 			for(int j = 0; j <= nbCasesWidth-1; j++){
-				if(x==i&&y==j){
-					this.TableauBase[i][j]=new JLabel(Tab[i][j]);
-					this.TableauBase[i][j].setSize(nbPixelSprite,nbPixelSprite);
-				}
-				else{
-					this.TableauBase[i][j]=new JLabel(Tab[i][j]);
-					this.TableauBase[i][j].setSize(nbPixelSprite,nbPixelSprite);
-				}
+				this.Tableau[i][j]=new JLabel(Tab[i][j]);
+				this.Tableau[i][j].setSize(nbPixelSprite,nbPixelSprite);
 			}
 		}
 		
-		this.Tableau=this.TableauBase;
-		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
 			for(int j = 0; j <= nbCasesWidth-1; j++){
-				panGame.add(this.TableauBase[i][j]);
-				this.TableauBase[i][j].setBounds(j*nbPixelSprite, i*nbPixelSprite, Tableau[i][j].getWidth(), Tableau[i][j].getHeight());
+				panGame.add(this.Tableau[i][j]);
+				this.Tableau[i][j].setBounds(j*nbPixelSprite, i*nbPixelSprite, Tableau[i][j].getWidth(), Tableau[i][j].getHeight());
 			}
 		}
 		
@@ -256,20 +246,15 @@ public class Game extends JFrame{
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
 			for(int j = 0; j <= nbCasesWidth-1; j++){
-				this.TableauBase[i][j]=new JLabel(Tab[i][j]);
-				this.TableauBase[i][j].setSize(nbPixelSprite,nbPixelSprite);
-			}
-		}
-		for(int i = 0; i <= nbCasesHeight-1; i++){
-			for(int j = 0; j <= nbCasesWidth-1; j++){
-				this.Tableau[i][j]=this.TableauBase[i][j];
+				this.Tableau[i][j]=new JLabel(Tab[i][j]);
+				this.Tableau[i][j].setSize(nbPixelSprite,nbPixelSprite);
 			}
 		}
 		
 		for(int i = 0; i <= nbCasesHeight-1; i++){
 			for(int j = 0; j <= nbCasesWidth-1; j++){
 				panGame.add(this.Tableau[i][j]);
-				this.TableauBase[i][j].setBounds(j*nbPixelSprite, i*nbPixelSprite, Tableau[i][j].getWidth(), Tableau[i][j].getHeight());
+				this.Tableau[i][j].setBounds(j*nbPixelSprite, i*nbPixelSprite, Tableau[i][j].getWidth(), Tableau[i][j].getHeight());
 			}
 		}
 		this.refreshScore();
@@ -301,15 +286,17 @@ public class Game extends JFrame{
 	@SuppressWarnings("deprecation")
 	public void newLevel(){
 		listener.stop();
+		this.saveScore();
 		this.dispose();
-		new Game(level+1);
+		new Game(level+1,pseudo);
 	}
 
 	@SuppressWarnings("deprecation")
 	public void restartLevel(){
 		listener.stop();
+		this.saveScore();
 		this.dispose();
-		new Game(level);
+		new Game(level,pseudo);
 	}
 	
 	
@@ -344,6 +331,10 @@ public class Game extends JFrame{
 		else{
 			return false;
 		}
+	}
+	
+	public void saveScore(){
+		l.saveScore(level, l.getScore(), pseudo);
 	}
 
 }

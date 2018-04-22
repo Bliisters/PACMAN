@@ -52,8 +52,7 @@ public class Accueil extends JFrame implements ActionListener {
 	Panneau panPrincipal;
 	Panneau panJouer;
 	Panneau panScore;
-	
-	JLabel labelScore1;
+
 	JLabel logo;
 	JLabel logoAnime;
 	JLabel logoAnime_2;
@@ -146,8 +145,6 @@ public class Accueil extends JFrame implements ActionListener {
 		pseudoLabel.setForeground(Color.BLACK);
 		levelLabel= new JLabel("Sélection du level :");
 		levelLabel.setForeground(Color.BLACK);
-		labelScore1= new JLabel("1. : TIBO");
-		labelScore1.setForeground(Color.WHITE);
 		
 		//Parametrage du panneau panPrincipal.
 		panPrincipal.setLayout(null);
@@ -191,12 +188,10 @@ public class Accueil extends JFrame implements ActionListener {
 		panScore.setLayout(null);
 		int longueurScore=500;
 		int HauteurScore=250;
-		int espacement=30;
 		fondScore.setLayout(null);
 		panScore.add(fondScore);
 		fondScore.setBounds(this.getWidth()/2-longueurScore/2, this.getHeight()/2-HauteurScore/2, longueurScore, HauteurScore);
-		fondScore.add(labelScore1);
-		labelScore1.setBounds(espacement,espacement,longueurScore-2*espacement,espacement);
+		this.setScore();
 		panScore.add(boutRetour);
 		boutRetour.setBounds(this.getWidth()/2-boutRetour.getLongueur()/2, 625, boutRetour.getLongueur(), boutRetour.getHauteur());	
 		
@@ -208,6 +203,35 @@ public class Accueil extends JFrame implements ActionListener {
 	//																	//
 	//////////////////////////////////////////////////////////////////////
 
+	
+	public void setScore(){
+		
+		int espacementVertical=15;
+		int espacementHorizontal=5;
+		int espacementInterScore=10;
+		int hauteurLabel=20;
+		
+		String tabScore[][]=new String[l.getNbLevel()*2][3];
+		tabScore=l.getHighscore();
+		int maxLevel=l.getNbLevel()*2;
+		
+		for (int i=0;i<=maxLevel-1;i++){
+			String score=new String();
+			if(i%2==0){
+				score=("HighScore -> Level : "+tabScore[i][0]+", Pseudo : "+tabScore[i][1]+", Score  : "+tabScore[i][2]+".\n");
+			}
+			else{
+				score=("Last Score -> Level : "+tabScore[i][0]+", Pseudo : "+tabScore[i][1]+", Score  : "+tabScore[i][2]+".\n");
+			}
+			JLabel scoreLabel=new JLabel(score);
+			scoreLabel.setForeground(Color.WHITE);
+			scoreLabel.setSize(fondScore.getWidth()-2*espacementHorizontal,hauteurLabel);
+			fondScore.add(scoreLabel);
+			scoreLabel.setBounds(espacementHorizontal, espacementVertical+(i*espacementInterScore)+(i*hauteurLabel), scoreLabel.getWidth(), scoreLabel.getHeight());
+		}
+		
+	}
+	
 	
 	@SuppressWarnings("deprecation")
 	
@@ -259,8 +283,7 @@ public class Accueil extends JFrame implements ActionListener {
 		if(arg0.getSource() == boutValidation){
 			
 			if(this.pseudo.getText().equals("")==false){
-				new Game((int)this.choiceLevel.getSelectedItem());
-				//new Jeux();
+				new Game((int)this.choiceLevel.getSelectedItem(),this.pseudo.getText());
 				this.dispose();
 				son.stop();
 			}

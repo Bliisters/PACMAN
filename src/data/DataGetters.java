@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 
 public interface DataGetters {
 	
+	public void saveScore(int level, int score, String pseudo);
 	
 	/**
      * Convert a text file to an int[][][] tab.
@@ -211,7 +212,7 @@ public interface DataGetters {
      *
      * @return a String tab [nom][score]
      */
-	public String[][] getHighccores(int i);
+	public String[][] getHighScores();
 	
 	
 	
@@ -229,5 +230,7 @@ public interface DataGetters {
 	public int getNbLifeMax(int i);
 	
 	public File getMusicFile(int i);
+	
+	public int getNbLevel();
 
 }

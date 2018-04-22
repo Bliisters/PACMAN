@@ -7,9 +7,16 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+
 public class Data implements DataGetters{
 	
+	File sauvegardeScore;
+    ObjectInputStream ois;
+    ObjectOutputStream oos;
+	
 	public Data(){
+		
+		sauvegardeScore=new File("files/score.txt");
 		
 	}
 	
@@ -353,11 +360,6 @@ public class Data implements DataGetters{
 			  
 		}
 	}
-	@Override
-	public String[][] getHighccores(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int[] getRules(int i) {
@@ -449,5 +451,105 @@ public class Data implements DataGetters{
 			  
 		}
 		
+	}
+	
+
+	@Override
+	public void saveScore(int level, int score, String pseudo) {
+		
+		String scoreString[][]=new String[this.getNbLevel()*2][3];
+		int maxLevel=this.getNbLevel()*2;
+		
+		for (int i=0;i<=maxLevel-1;i++){
+			for (int j=0;j<=2;j++){
+				scoreString[i][j]="0";
+			}
+		}
+		
+		try {      
+		      try {
+		    	  
+		    	ois = new ObjectInputStream(
+			              new BufferedInputStream(
+			                new FileInputStream(sauvegardeScore)));
+
+		    	scoreString=(String[][])ois.readObject();
+
+		      } catch (ClassNotFoundException e) {
+		        e.printStackTrace();
+		      } 
+			
+		      ois.close();
+		      
+		      } catch (FileNotFoundException e) {
+		          e.printStackTrace();
+		      } catch (IOException e) {
+		        e.printStackTrace();
+		      }
+		
+		sauvegardeScore.delete();
+		System.out.println(scoreString[(level-1)*2][2]);
+		if(score>Integer.parseInt(scoreString[(level-1)*2][2])){
+			scoreString[(level-1)*2][0]=Integer.toString(level);
+			scoreString[(level-1)*2][1]=pseudo;
+			scoreString[(level-1)*2][2]=Integer.toString(score);
+		}
+		
+		scoreString[(level-1)*2+1][0]=Integer.toString(level);
+		scoreString[(level-1)*2+1][1]=pseudo;
+		scoreString[(level-1)*2+1][2]=Integer.toString(score);
+		
+
+		try {
+			oos = new ObjectOutputStream(
+					new BufferedOutputStream(
+							new FileOutputStream(sauvegardeScore)));
+			oos.writeObject(scoreString);
+			oos.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}     	
+	}
+
+	@Override
+	public String[][] getHighScores() {
+		
+		String scoreString[][]=new String[this.getNbLevel()*2][3];
+		int maxLevel=this.getNbLevel()*2;
+		
+		for (int i=0;i<=maxLevel-1;i++){
+			for (int j=0;j<=2;j++){
+				scoreString[i][j]="0";
+			}
+		}
+		
+		try {      
+		      try {
+		    	  
+		    	ois = new ObjectInputStream(
+			              new BufferedInputStream(
+			                new FileInputStream(sauvegardeScore)));
+
+		    	scoreString=(String[][])ois.readObject();
+
+		      } catch (ClassNotFoundException e) {
+		        e.printStackTrace();
+		      } 
+			
+		      ois.close();
+		      
+		      } catch (FileNotFoundException e) {
+		          e.printStackTrace();
+		      } catch (IOException e) {
+		        e.printStackTrace();
+		      }
+		return scoreString;		
+	}
+	
+	public int getNbLevel(){
+		return 3;
 	}
 }

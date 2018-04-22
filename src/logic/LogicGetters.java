@@ -5,10 +5,11 @@ import java.io.File;
 import javax.swing.ImageIcon;
 
 import data.Data;
+import data.DataGetters;
 
 public class LogicGetters implements Logic{
 	
-	Data d;
+	DataGetters d;
 	Mapi m;
 	
 	public ImageIcon[][] getTableau(String key){
@@ -36,9 +37,8 @@ public class LogicGetters implements Logic{
 	}
 
 	@Override
-	public int getHighscore(int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String[][] getHighscore() {
+		return d.getHighScores();
 	}
 
 	@Override
@@ -89,6 +89,16 @@ public class LogicGetters implements Logic{
 	@Override
 	public boolean checkMort() {
 		return m.checkMort();
+	}
+
+	@Override
+	public void saveScore(int level, int score, String pseudo) {
+		d.saveScore(level,score,pseudo);
+	}
+
+	@Override
+	public int getNbLevel() {
+		return d.getNbLevel();
 	}
 
 }

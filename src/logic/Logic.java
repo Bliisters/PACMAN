@@ -7,13 +7,17 @@ import javax.swing.ImageIcon;
 
 public interface Logic {
 	
+	public int getNbLevel();
+	
+	public void saveScore(int level, int score, String pseudo);
+	
 	public int getNbCasesWidth(int i);
 	
 	public int getNbCasesHeight(int i);
 	
 	public ImageIcon getSpriteTiles(int i);
 	
-	public int getHighscore(int i);
+	public String[][] getHighscore();
 	
 	public int getRules(int i);
 	

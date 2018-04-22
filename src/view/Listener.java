@@ -68,6 +68,7 @@ public class Listener extends Thread implements KeyListener  {
 	  	if((arg0.getKeyCode()==KeyEvent.VK_M)){
 	  		if(game.checkWin()||game.checkGameOver()){
 	  			g.stop();
+	  			game.saveScore();
 		  		game.dispose();
 		  		new Accueil();
 	  		}

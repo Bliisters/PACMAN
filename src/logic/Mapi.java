@@ -41,7 +41,7 @@ public class Mapi {
 		map = new Element[mapHeight][mapWidth][2];
 		
 		int[][] ini=data.getTableau(level);
-			System.out.println(ini.length+"  "+ini[0].length+"  "+map.length+"  "+map[0].length);
+			//System.out.println(ini.length+"  "+ini[0].length+"  "+map.length+"  "+map[0].length);
 		for(int i=0;i<mapHeight;i++) {
 			for(int j=0;j<mapWidth;j++){
 				map[i][j][1]=null;
@@ -109,7 +109,7 @@ public class Mapi {
 		boolean choc2=false;
 		boolean choc3=false;
 		boolean choc4=false;
-		System.out.println(key);
+		//System.out.println(key);
 		if(key.equals("INIT")){System.out.println(this.mort);}
 		else{
 			boolean v=movePACMAN(key);
@@ -192,7 +192,7 @@ public class Mapi {
 				}
 			}
 		}
-		System.out.println(this.mort);
+		//System.out.println(this.mort);
 		return im;
 	}
 	
@@ -368,22 +368,22 @@ public class Mapi {
 			
 			
 			while(possiblemove(x1,y1)==false) {			
-				System.out.println(dist[0]+"   "+dist[1]+"   "+dist[2]+"   "+dist[3]);
-				System.out.println(Blinky.getPosx()+"   "+Blinky.getPosy()+"   "+pacman.getPosx()+"   "+pacman.getPosy());
+				//System.out.println(dist[0]+"   "+dist[1]+"   "+dist[2]+"   "+dist[3]);
+				//System.out.println(Blinky.getPosx()+"   "+Blinky.getPosy()+"   "+pacman.getPosx()+"   "+pacman.getPosy());
 				//move left
 				if(dist[0]<=dist[1] && dist[0]<= dist[2] && dist[0]<=dist[3]) {
-					x1=x; y1=y-1;dist[0]=99;System.out.println("Pacman est à gauche");C=0;}
+					x1=x; y1=y-1;dist[0]=99;/*System.out.println("Pacman est à gauche")*/;C=0;}
 				
 				//right
 				else if(dist[1]<= dist[2] && dist[1]<=dist[3]) {
-					x1=x; y1=y+1;dist[1]=99;System.out.println("Pacman est à droite");C=1;}
+					x1=x; y1=y+1;dist[1]=99;/*System.out.println("Pacman est à droite")*/;C=1;}
 					
 				//UP
 				else if(dist[2]<=dist[3]) {
-					x1=x-1; y1=y; dist[2] = 99;System.out.println("Pacman est en haut");C=2;}
+					x1=x-1; y1=y; dist[2] = 99;/*System.out.println("Pacman est en haut")*/;C=2;}
 				
 				//DOWN
-				else{x1=x+1; y1=y; dist[3] = 99;System.out.println("Pacman est en bas");C=3;  }
+				else{x1=x+1; y1=y; dist[3] = 99;/*System.out.println("Pacman est en bas")*/;C=3;  }
 				
 			}
 			
@@ -444,22 +444,22 @@ public class Mapi {
 			
 			
 			while(possiblemove(x1,y1)==false) {			
-				System.out.println(dist[0]+"   "+dist[1]+"   "+dist[2]+"   "+dist[3]);
-				System.out.println(Blinky.getPosx()+"   "+Blinky.getPosy()+"   "+pacman.getPosx()+"   "+pacman.getPosy());
+				//System.out.println(dist[0]+"   "+dist[1]+"   "+dist[2]+"   "+dist[3]);
+				//System.out.println(Blinky.getPosx()+"   "+Blinky.getPosy()+"   "+pacman.getPosx()+"   "+pacman.getPosy());
 				//move left
 				if(dist[0]<=dist[1] && dist[0]<= dist[2] && dist[0]<=dist[3]) {
-					x1=x; y1=y-1;dist[0]=99;System.out.println("Pacman est à gauche");C=0;}
+					x1=x; y1=y-1;dist[0]=99;/*System.out.println("Pacman est à gauche")*/;C=0;}
 				
 				//right
 				else if(dist[1]<= dist[2] && dist[1]<=dist[3]) {
-					x1=x; y1=y+1;dist[1]=99;System.out.println("Pacman est à droite");C=1;}
+					x1=x; y1=y+1;dist[1]=99;/*System.out.println("Pacman est à droite")*/;C=1;}
 					
 				//UP
 				else if(dist[2]<=dist[3]) {
-					x1=x-1; y1=y; dist[2] = 99;System.out.println("Pacman est en haut");C=2;}
+					x1=x-1; y1=y; dist[2] = 99;/*System.out.println("Pacman est en haut")*/;C=2;}
 				
 				//DOWN
-				else{x1=x+1; y1=y; dist[3] = 99;System.out.println("Pacman est en bas");C=3;  }
+				else{x1=x+1; y1=y; dist[3] = 99;/*System.out.println("Pacman est en bas")*/;C=3;  }
 				
 			}
 			
