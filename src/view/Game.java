@@ -311,16 +311,20 @@ public class Game extends JFrame{
 	@SuppressWarnings("deprecation")
 	public void checkFinish(){
 		if(l.checkFinish()){
+			
 			cl.show(container, "WIN");
 			this.son.stop();
+			this.stopGame();
 		}
 	}
 	
 	@SuppressWarnings("deprecation")
 	public void checkLife(){
 		if(l.getNbLife()<=0){
+			
 			cl.show(container, "LOSE");
 			this.son.stop();
+			this.stopGame();
 		}
 	}
 	
@@ -339,6 +343,10 @@ public class Game extends JFrame{
 	
 	public int getLevel(){
 		return this.level;
+	}
+	
+	public void stopGame(){
+		listener.stopGame();
 	}
 
 }

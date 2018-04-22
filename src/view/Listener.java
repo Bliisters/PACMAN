@@ -96,5 +96,9 @@ public class Listener extends Thread implements KeyListener  {
 	public void setKey (String s){
 		this.currentKey=s;
 	}
+	@SuppressWarnings("deprecation")
+	public void stopGame(){
+		g.stop();
+	}
 }
 	
