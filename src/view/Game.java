@@ -336,5 +336,9 @@ public class Game extends JFrame{
 	public void saveScore(){
 		l.saveScore(level, l.getScore(), pseudo);
 	}
+	
+	public int getLevel(){
+		return this.level;
+	}
 
 }

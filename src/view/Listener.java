@@ -4,11 +4,14 @@ package view;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import data.Data;
+
 public class Listener extends Thread implements KeyListener  {
 	
 	Game game;
 	String currentKey;
 	Gestion g;
+	Data d;
 	
 	public Listener(Game game)
 	{
@@ -17,6 +20,7 @@ public class Listener extends Thread implements KeyListener  {
 		this.currentKey="";
 		g=new Gestion(this, game);
 		g.start();
+		d=new Data();
 		
 	}
 	
@@ -47,7 +51,12 @@ public class Listener extends Thread implements KeyListener  {
 	  	if((arg0.getKeyCode()==KeyEvent.VK_N)){
 	  		if(game.checkWin()){
 	  			g.stop();
-		  		game.newLevel();
+	  			int test=(game.getLevel());
+	  			if(d.getNbLevel()>=test){
+	  				game.dispose();
+	  				new Accueil();
+	  			}
+	  			else{game.newLevel();}
 	  		}
 	  	}
 	  	
