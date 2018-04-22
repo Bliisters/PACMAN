@@ -15,7 +15,7 @@ public class Mapi {
 	
 	private int nbgommes=0;
 	private int cmptGhosts = 1;
-	private int cmptMange =10;
+	private int cmptMange =16;
 	private Element[][][] map;
 	private Pacman pacman;
 	private Blinky Blinky;
@@ -121,7 +121,7 @@ public class Mapi {
 			choc3 = movePinky(this.Pinky);
 			choc4 = moveClyde(this.Clyde);
 			
-			if(this.cmptMange<10) {
+			if(this.cmptMange<16) {
 				this.cmptMange=this.cmptMange+1;
 			}
 			else {
@@ -321,10 +321,10 @@ public class Mapi {
 				else if(C==3) {x1=x+1; y1=y;}
 				
 			}
-			if(F.getMangeable()==true && this.cmptMange<7) {
+			if(F.getMangeable()==true && this.cmptMange<10) {
 				F.changeDirection(9);
 			}
-			else if(F.getMangeable()==true && this.cmptMange>=7){
+			else if(F.getMangeable()==true && this.cmptMange>=10){
 				F.changeDirection(8);
 			}
 			else { F.changeDirection(C); }
@@ -387,10 +387,10 @@ public class Mapi {
 				
 			}
 			
-			if(F.getMangeable()==true && this.cmptMange<7) {
+			if(F.getMangeable()==true && this.cmptMange<10) {
 				F.changeDirection(9);
 			}
-			else if(F.getMangeable()==true && this.cmptMange>=7){
+			else if(F.getMangeable()==true && this.cmptMange>=10){
 				F.changeDirection(8);
 			}
 			else if(F.getEstMange()) {
@@ -463,10 +463,10 @@ public class Mapi {
 				
 			}
 			
-			if(F.getMangeable()==true && this.cmptMange<7) {
+			if(F.getMangeable()==true && this.cmptMange<10) {
 				F.changeDirection(9);
 			}
-			else if(F.getMangeable()==true && this.cmptMange>=7){
+			else if(F.getMangeable()==true && this.cmptMange>=10){
 				F.changeDirection(8);
 			}
 			else { F.changeDirection(C); }

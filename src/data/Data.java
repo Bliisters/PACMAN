@@ -552,6 +552,6 @@ public class Data implements DataGetters{
 	}
 	
 	public int getNbLevel(){
-		return 3;
+		return 4;
 	}
 }
