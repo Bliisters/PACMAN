@@ -116,7 +116,7 @@ public class Mapi {
 			if(!v) {
 				movePACMAN(this.pacman.getLastMove());
 			}
-			choc1 = moveGhost(this.Blinky);
+			choc1 = moveBlinky(this.Blinky);
 			choc2 = moveGhost(this.Inky);
 			choc3 = moveGhost(this.Pinky);
 			choc4 = moveGhost(this.Clyde);
@@ -372,6 +372,75 @@ public class Mapi {
 			}
 			return choc;			
 		}
+		
+		
+		public boolean moveBlinky(Ghost F) {
+			int x = F.getPosx();
+			int y = F.getPosy();
+			int L = F.getLastMove();
+			int x1=0;
+			int y1=0;
+			int C=0;
+			int pmx = this.pacman.getPosx();
+			int pmy = this.pacman.getPosy();
+			boolean choc=false;
+
+			
+			if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x+1,y)==false) {L=3;}			//Mouvement si impasse
+			else if(possiblemove(x,y-1)==false && possiblemove(x,y+1)==false && possiblemove(x-1,y)==false) {L=2;}
+			else if(possiblemove(x,y+1)==false && possiblemove(x-1,y)==false && possiblemove(x+1,y)==false) {L=1;}
+			else if(possiblemove(x,y-1)==false && possiblemove(x-1,y)==false && possiblemove(x+1,y)==false) {L=0;}
+			
+			double[] dist = {(Math.sqrt(Math.pow(pmx-x, 2.0)+Math.pow(pmy-y+1,2))),
+					(Math.sqrt(Math.pow(pmx-x, 2)+Math.pow(pmy-y-1,2))),
+					(Math.sqrt(Math.pow(pmx-x+1, 2)+Math.pow(pmy-y,2))),
+					(Math.sqrt(Math.pow(pmx-x-1, 2)+Math.pow(pmy-y ,2)))};
+
+			if (L<5)dist[L] = 99;
+			
+			
+			while(possiblemove(x1,y1)==false) {			
+				System.out.println(dist[0]+"   "+dist[1]+"   "+dist[2]+"   "+dist[3]);
+				System.out.println(Blinky.getPosx()+"   "+Blinky.getPosy()+"   "+pacman.getPosx()+"   "+pacman.getPosy());
+				//move left
+				if(dist[0]<=dist[1] && dist[0]<= dist[2] && dist[0]<=dist[3]) {
+					x1=x; y1=y-1;dist[0]=99;System.out.println("Pacman est à gauche");C=0;}
+				
+				//right
+				else if(dist[1]<= dist[2] && dist[1]<=dist[3]) {
+					x1=x; y1=y+1;dist[1]=99;System.out.println("Pacman est à droite");C=1;}
+					
+				//UP
+				else if(dist[2]<=dist[3]) {
+					x1=x-1; y1=y; dist[2] = 99;System.out.println("Pacman est en haut");C=2;}
+				
+				//DOWN
+				else{x1=x+1; y1=y; dist[3] = 99;System.out.println("Pacman est en bas");C=3;}
+				
+			}
+			
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			
+			if(F.getMangeable()==true && this.cmptMange<7) {
+				F.changeDirection(9);
+			}
+			else if(F.getMangeable()==true && this.cmptMange>=7){
+				F.changeDirection(8);
+			}
+			else { F.changeDirection(C); }
+			
+			this.map[x1][y1][1]=F;
+			F.setLastMove(C);
+			F.setPos(x1, y1);
+			if(this.map[x][y][0]==this.pacman || this.map[x1][y1][0]==this.pacman) {
+				choc=true;
+			}
+			if(this.map[x][y][1]==F) {
+				this.map[x][y][1]=null;
+			}
+			return choc;			
+		}
+		
 		
 		public int getNbLife(){
 			return this.vie;
